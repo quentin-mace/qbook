@@ -2,23 +2,19 @@
 
 namespace lib\controllers;
 
+use views\View;
+
 class HomeController
 {
     public function showHome(): void
     {
-        $title = "Home";
-        ob_start();
-        require "views/templates/home.php";
-        $content = ob_get_clean();
-        require "views/templates/main.php";
+        $view = new View("Home");
+        $view->render("home");
     }
 
     public function showError(): void
     {
-        $title = "Erreur 404";
-        ob_start();
-        require "views/templates/error.php";
-        $content = ob_get_clean();
-        require "views/templates/main.php";
+        $view = new View("Erreur 404");
+        $view->render("error");
     }
 }

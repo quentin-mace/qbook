@@ -2,6 +2,7 @@
 use config\Autoloader;
 use lib\controllers\HomeController;
 
+require "config/config.php";
 require "config/Autoloader.php";
 
 Autoloader::register();
