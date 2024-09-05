@@ -5,4 +5,6 @@ require "config/Autoloader.php";
 
 Autoloader::register();
 
-echo "hello world";
+$title = "Home";
+$content = '<h1 class="text-center">Hello, world!</h1>';
+require "views/templates/main.php";
