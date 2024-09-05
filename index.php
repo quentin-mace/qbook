@@ -1,10 +1,26 @@
 <?php
 use config\Autoloader;
+use lib\controllers\HomeController;
 
 require "config/Autoloader.php";
 
 Autoloader::register();
 
-$title = "Home";
-$content = '<h1 class="text-center">Hello, world!</h1>';
-require "views/templates/main.php";
+$action = "home";
+
+$parameters = $_GET;
+
+if(isset($parameters["action"])){
+    $action = $parameters["action"];
+}
+
+switch ($action) {
+    case "home":
+        $homeController = new HomeController();
+        $homeController->showHome();
+        break;
+    default:
+        $homeController = new HomeController();
+        $homeController->showError();
+        break;
+}
