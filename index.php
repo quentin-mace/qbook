@@ -1,5 +1,6 @@
 <?php
 use config\Autoloader;
+use lib\controllers\ErrorController;
 use lib\controllers\HomeController;
 
 require "config/config.php";
@@ -21,7 +22,7 @@ switch ($action) {
         $homeController->showHome();
         break;
     default:
-        $homeController = new HomeController();
-        $homeController->showError();
+        $errorController = new ErrorController();
+        $errorController->show404();
         break;
 }

@@ -11,10 +11,4 @@ class HomeController
         $view = new View("Home");
         $view->render("home");
     }
-
-    public function showError(): void
-    {
-        $view = new View("Erreur 404");
-        $view->render("error");
-    }
 }
