@@ -1,14 +1,14 @@
 <?php
     
-    // En fonction des routes utilisées, il est possible d'avoir besoin de la session ; on la démarre dans tous les cas. 
+    // Depending on the routes used, we might need the session ; we start it anyway.
     session_start();
 
-    // Ici on met les constantes utiles, 
-    // les données de connexions à la bdd
-    // et tout ce qui sert à configurer. 
+    // Here we define the useful constants,
+    // db connexion data
+    // and everything we need to configure.
 
-    define('TEMPLATE_VIEW_PATH', './views/templates/'); // Le chemin vers les templates de vues.
-    define('MAIN_VIEW_PATH', TEMPLATE_VIEW_PATH . 'main.php'); // Le chemin vers le template principal.
+    define('TEMPLATE_VIEW_PATH', './views/templates/'); // The path to views templates.
+    define('MAIN_VIEW_PATH', TEMPLATE_VIEW_PATH . 'main.php'); // The path to main template.
 
     define('DB_HOST', 'mysql');
     define('DB_NAME', 'qbook');

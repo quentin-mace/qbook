@@ -4,8 +4,16 @@ namespace lib\controllers;
 
 use views\View;
 
+/**
+ * Controller used to load all the different flavors of errors pages
+ */
 class ErrorController
 {
+    /**
+     * Method used to display a 404 error, when the page is not found
+     *
+     * @return void
+     */
     public function show404(): void
     {
         $errorType = "404";
@@ -19,6 +27,12 @@ class ErrorController
             ]);
     }
 
+    /**
+     * Method used to display the errors messages that are thrown
+     *
+     * @param string $errorMessage
+     * @return void
+     */
     public function showException(string $errorMessage): void
     {
         $errorType = "";
