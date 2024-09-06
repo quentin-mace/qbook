@@ -36,7 +36,7 @@ class ErrorController
     public function showException(string $errorMessage): void
     {
         $errorType = "";
-        $view = new View("Erreur 404");
+        $view = new View("Erreur");
         $view->render(
             "error",
             [

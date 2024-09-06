@@ -36,6 +36,7 @@ class View
 
     /**
      * Method to render the specific view.
+     *
      * @param $viewPath : path to the view file
      * @param array $params : parameters passed by the controller to the view.
      * @return string : content of the view
