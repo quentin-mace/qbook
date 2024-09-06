@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  php:
+    build: .
+    container_name: php
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "7979:80"
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: #Replace with your own root password (Match with config.php)
+      MYSQL_DATABASE: qbook
+    volumes:
+      - mysql-data:/var/lib/qbook
+    ports:
+      - "3407:3306"
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_USER: root #Replace with your own user and password (Match with config.php)
+      MYSQL_ROOT_PASSWORD:
+    ports:
+      - "7978:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:

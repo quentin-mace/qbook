@@ -1,1 +1,6 @@
+#PHPstorm files
 .idea
+
+#Config files
+config/config.php
+docker-compose.yml
