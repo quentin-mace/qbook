@@ -18,4 +18,16 @@ class ErrorController
                 'errorMessage' => $errorMessage
             ]);
     }
+
+    public function showException(string $errorMessage): void
+    {
+        $errorType = "";
+        $view = new View("Erreur 404");
+        $view->render(
+            "error",
+            [
+                'errorType' => $errorType,
+                'errorMessage' => $errorMessage
+            ]);
+    }
 }

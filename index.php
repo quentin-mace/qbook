@@ -16,13 +16,19 @@ if(isset($parameters["action"])){
     $action = $parameters["action"];
 }
 
-switch ($action) {
-    case "home":
-        $homeController = new HomeController();
-        $homeController->showHome();
-        break;
-    default:
-        $errorController = new ErrorController();
-        $errorController->show404();
-        break;
+
+try {
+    switch ($action) {
+        case "home":
+            $homeController = new HomeController();
+            $homeController->showHome();
+            break;
+        default:
+            $errorController = new ErrorController();
+            $errorController->show404();
+            break;
+    }
+} catch (Exception $e) {
+    $errorController = new ErrorController();
+    $errorController->showException($e->getMessage());
 }
