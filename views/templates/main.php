@@ -14,7 +14,7 @@
 
 
 </head>
-<body>
+<body class="">
     <nav class="navbar navbar-expand shadow-sm">
         <div id="logo-title" class="row align-items-center ms-3">
             <a href="index.php" class="col p-0">
@@ -25,7 +25,7 @@
             <p class="col fs-2 fw-bold mb-0">QBook</p>
         </div>
     </nav>
-    <main class="container justify-content-center mt-5">
+    <main class="min-vh-100 container d-flex justify-content-center align-items-center h-100">
         <?= $content ?>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
