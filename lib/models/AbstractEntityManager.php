@@ -2,7 +2,7 @@
 
 namespace lib\models;
 
-use DBManager;
+use lib\models\DBManager;
 
 /**
  * Abstract class that centralise all methods common to all DB entities managers. It automatically gets the DB manager.
