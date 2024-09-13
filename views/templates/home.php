@@ -11,10 +11,10 @@
     <tbody class="">
         <?php foreach ($bookings as $booking): ?>
             <tr class="row-link" onclick="window.location='index.php?action=home';">
-                <th scope="row"><?= $booking->getRoom()->getName(); ?></th>
-                <td><?= $booking->getFormatedDate(); ?></td>
-                <td><?= $booking->getUser()->getName(); ?></td>
-                <td><?= $booking->getName(); ?></td>
+                <th scope="row"><?= $booking->getRoomName(); ?></th>
+                <td><?= $booking->getFormatedStartDate(); ?></td>
+                <td><?= $booking->getUserName(); ?></td>
+                <td><?= $booking->getTitle(); ?></td>
                 <td><?= $booking->getParticipantsCount(); ?></td>
             </tr>
         <?php endforeach; ?>
