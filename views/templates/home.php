@@ -11,7 +11,7 @@
     <tbody class="">
         <?php foreach ($bookings as $booking): ?>
             <tr class="row-link" onclick="window.location='index.php?action=home';">
-                <th scope="row"><?= $booking->getRoomName(); ?></th>
+                <th scope="row"><?= ucfirst($booking->getRoomName()); ?></th>
                 <td><?= $booking->getFormatedStartDate(); ?></td>
                 <td><?= $booking->getUserName(); ?></td>
                 <td><?= $booking->getTitle(); ?></td>

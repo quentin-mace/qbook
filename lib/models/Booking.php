@@ -3,6 +3,7 @@
 namespace lib\models;
 
 use DateTime;
+use Exception;
 use lib\models\AbstractEntity;
 
 class Booking extends AbstractEntity
@@ -10,8 +11,8 @@ class Booking extends AbstractEntity
     private int $userId;
     private int $roomId;
     private string $title;
-    private ?DateTime $startDate;
-    private ?DateTime $endDate;
+    private DateTime $startAt;
+    private DateTime $endAt;
     private int $participantsCount;
 
     public function getUserId(): int
@@ -44,24 +45,30 @@ class Booking extends AbstractEntity
         $this->title = $title;
     }
 
-    public function getStartDate(): ?DateTime
+    public function getStartAt(): DateTime
     {
-        return $this->startDate;
+        return $this->startAt;
     }
 
-    public function setStartDate(?DateTime $startDate): void
+    /**
+     * @throws Exception
+     */
+    public function setStartAt(string $startDate): void
     {
-        $this->startDate = $startDate;
+        $this->startAt = new DateTime($startDate);
     }
 
-    public function getEndDate(): ?DateTime
+    public function getEndAt(): DateTime
     {
-        return $this->endDate;
+        return $this->endAt;
     }
 
-    public function setEndDate(?DateTime $endDate): void
+    /**
+     * @throws Exception
+     */
+    public function setEndAt(string $endDate): void
     {
-        $this->endDate = $endDate;
+        $this->endAt = new DateTime($endDate);
     }
 
     public function getParticipantsCount(): int
@@ -72,5 +79,29 @@ class Booking extends AbstractEntity
     public function setParticipantsCount(int $participantsCount): void
     {
         $this->participantsCount = $participantsCount;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getRoomName(): string
+    {
+        $roomManager = new RoomManager();
+        return $roomManager->getById($this->roomId)->getName();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getFormatedStartDate(): string
+    {
+        $startDate = $this->startAt;
+        return $startDate->format("d/m/Y");
+    }
+
+    public function getUserName(): string
+    {
+        $userManager = new UserManager();
+        return $userManager->getById($this->userId)->getName();
     }
 }

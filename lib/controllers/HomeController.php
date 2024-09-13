@@ -2,6 +2,7 @@
 
 namespace lib\controllers;
 
+use lib\models\BookingManager;
 use views\View;
 
 /**
@@ -16,7 +17,12 @@ class HomeController
      */
     public function showHome(): void
     {
-        $view = new View("Home");
-        $view->render("home");
+        $bookingManager = new BookingManager();
+        $bookings = $bookingManager->getBookings();
+
+        $view = new View("Réservations");
+        $view->render("home",[
+            'bookings' => $bookings
+        ]);
     }
 }
