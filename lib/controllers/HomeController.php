@@ -2,6 +2,7 @@
 
 namespace lib\controllers;
 
+use Exception;
 use lib\models\BookingManager;
 use views\View;
 
@@ -14,6 +15,7 @@ class HomeController
      * Method to display the homepage
      *
      * @return void
+     * @throws Exception
      */
     public function showHome(): void
     {
@@ -24,5 +26,14 @@ class HomeController
         $view->render("home",[
             'bookings' => $bookings
         ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function showLogin(): void
+    {
+        $view = new View("Login");
+        $view->render("login");
     }
 }
