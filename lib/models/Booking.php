@@ -99,6 +99,9 @@ class Booking extends AbstractEntity
         return $startDate->format("d/m/Y");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getUserName(): string
     {
         $userManager = new UserManager();

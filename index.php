@@ -29,6 +29,10 @@ try {
             $homeController = new HomeController();
             $homeController->showHome();
             break;
+        case "login":
+            $homeController = new HomeController();
+            $homeController->showLogin();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();
