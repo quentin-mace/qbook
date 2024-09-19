@@ -1,0 +1,13 @@
+{
+    "name": "quarks/qbook",
+    "description": "Room booking software",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Quentin Macé"
+        }
+    ],
+    "require": {
+        "twbs/bootstrap": "5.3.3"
+    }
+}
