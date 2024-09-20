@@ -4,6 +4,7 @@ namespace lib\controllers;
 
 use Exception;
 use lib\models\BookingManager;
+use services\Utils;
 use views\View;
 
 /**
@@ -19,6 +20,8 @@ class HomeController
      */
     public function showHome(): void
     {
+        $this->checkIfUserIsConnected();
+
         $bookingManager = new BookingManager();
         $bookings = $bookingManager->getBookings();
 
@@ -26,6 +29,17 @@ class HomeController
         $view->render("home",[
             'bookings' => $bookings
         ]);
+    }
+
+    /**
+     * Check if a user is connected.
+     * @return void
+     */
+    private function checkIfUserIsConnected() : void
+    {
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("login");
+        }
     }
 
     /**

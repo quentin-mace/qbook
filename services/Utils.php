@@ -1,6 +1,6 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
+namespace services;
 
 /**
  * Utility class : this class only contains static methods.
