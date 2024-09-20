@@ -26,7 +26,7 @@
         </div>
         <div class="mx-5">
             <?php if(isset($_SESSION["user"])) : ?>
-                <a href="index.php?action=logoff">Déconnexion</a>
+                <a <?= \services\Utils::askConfirmation("Êtes vous sûr de voulloir vous déconnecter ?") ?> href="index.php?action=logoff">Déconnexion</a>
             <?php endif; ?>
         </div>
 
