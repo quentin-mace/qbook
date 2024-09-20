@@ -4,6 +4,7 @@ namespace lib\controllers;
 
 use Exception;
 use lib\models\BookingManager;
+use lib\models\UserManager;
 use services\Utils;
 use views\View;
 
@@ -13,8 +14,7 @@ use views\View;
 class HomeController
 {
     /**
-     * Method to display the homepage
-     *
+     * Displays the homepage.
      * @return void
      * @throws Exception
      */
@@ -32,6 +32,31 @@ class HomeController
     }
 
     /**
+     * Check the connexion information and either redirect on the login page or connect the user and redirect to homepage.
+     * @throws Exception
+     */
+    public function confirmLogin(): void
+    {
+        $email = Utils::request("email");
+        $password = Utils::request("password");
+
+        if(!$email || !$password){
+            throw new Exception("Email ou mot de passe non remplis.");
+        }
+
+        $userManager = new UserManager();
+        $user = $userManager->getByEmail($email);
+
+        if(!password_verify($password, $user->getPassword())){
+            throw new Exception("Mot de passe incorrect.");
+        }
+
+        $_SESSION["user"] = $user->getId();
+
+        Utils::redirect('home');
+    }
+
+    /**
      * Check if a user is connected.
      * @return void
      */
@@ -43,6 +68,7 @@ class HomeController
     }
 
     /**
+     * Displays the login page.
      * @throws Exception
      */
     public function showLogin(): void

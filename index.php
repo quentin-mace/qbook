@@ -33,6 +33,10 @@ try {
             $homeController = new HomeController();
             $homeController->showLogin();
             break;
+        case "confirmLogin":
+            $homeController = new HomeController();
+            $homeController->confirmLogin();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();
