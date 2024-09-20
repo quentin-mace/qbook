@@ -29,9 +29,21 @@ class UserManager extends AbstractEntityManager
         $sql = "SELECT * FROM users WHERE email = :email";
         $user = $this->db->query($sql, ['email' => $email])->fetchObject('lib\models\User');
         if(!$user){
-            $homeController = new HomeController();
-            $homeController->showLogin("L'adresse email <strong>{$email}</strong> n'est associée à aucun compte.");
+            return null;
         }
         return $user;
+    }
+
+    public function addUser(User $user): bool
+    {
+        $sql = "INSERT INTO users (name, email, password, role_id) VALUES (:name, :email, :password, 1)";
+        $response = $this
+            ->db
+            ->query($sql, [
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'password' => $user->getPassword()
+            ]);
+        return $response->rowCount() > 0;
     }
 }

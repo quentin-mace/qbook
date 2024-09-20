@@ -41,6 +41,14 @@ try {
             $homeController = new HomeController();
             $homeController->logOff();
             break;
+        case "signin":
+            $homeController = new HomeController();
+            $homeController->showSignin();
+            break;
+        case "confirmSignin":
+            $homeController = new HomeController();
+            $homeController->confirmSignin();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();

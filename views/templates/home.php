@@ -1,3 +1,8 @@
+<?php if(isset($infoMessage)): ?>
+    <div class="alert alert-primary" role="alert">
+        <?= $infoMessage ?>
+    </div>
+<?php endif; ?>
 <table class="table table-striped table-hover table-borderless position-relative" style="top: -100px">
     <thead class="table-secondary text-uppercase">
         <tr>
