@@ -32,7 +32,8 @@ class HomeController
     }
 
     /**
-     * Check the connexion information and either redirect on the login page or connect the user and redirect to homepage.
+     * Check the connexion information and either redirect on the login page
+     * or connect the user and redirect to homepage.
      * @throws Exception
      */
     public function confirmLogin(): void
@@ -53,6 +54,16 @@ class HomeController
 
         $_SESSION["user"] = $user->getId();
 
+        Utils::redirect('home');
+    }
+
+    /**
+     * Logs of the user and redirect to the homepage
+     * @return void
+     */
+    public function logOff(): void
+    {
+        unset($_SESSION["user"]);
         Utils::redirect('home');
     }
 
