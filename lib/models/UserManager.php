@@ -3,6 +3,7 @@
 namespace lib\models;
 
 use Exception;
+use lib\controllers\HomeController;
 use lib\models\AbstractEntityManager;
 
 class UserManager extends AbstractEntityManager
@@ -28,7 +29,8 @@ class UserManager extends AbstractEntityManager
         $sql = "SELECT * FROM users WHERE email = :email";
         $user = $this->db->query($sql, ['email' => $email])->fetchObject('lib\models\User');
         if(!$user){
-            throw new Exception("No user with email {$email} found");
+            $homeController = new HomeController();
+            $homeController->showLogin("L'adresse email <strong>{$email}</strong> n'est associée à aucun compte.");
         }
         return $user;
     }

@@ -42,14 +42,14 @@ class HomeController
         $password = Utils::request("password");
 
         if(!$email || !$password){
-            throw new Exception("Email ou mot de passe non remplis.");
+            $this->showLogin("Email ou mot de passe non remplis.");
         }
 
         $userManager = new UserManager();
         $user = $userManager->getByEmail($email);
 
         if(!password_verify($password, $user->getPassword())){
-            throw new Exception("Mot de passe incorrect.");
+            $this->showLogin("Mot de passe incorrect.");
         }
 
         $_SESSION["user"] = $user->getId();
@@ -82,9 +82,19 @@ class HomeController
      * Displays the login page.
      * @throws Exception
      */
-    public function showLogin(): void
+    public function showLogin(string $errorMessage = null): void
     {
-        $view = new View("Login");
-        $view->render("login");
+        if(isset($errorMessage)){
+            $view = new View("Login");
+            $view->render(
+                "login",
+                [
+                    "errorMessage" => $errorMessage
+                ]
+            );
+        } else {
+            $view = new View("Login");
+            $view->render("login");
+        }
     }
 }
