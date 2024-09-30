@@ -24,8 +24,13 @@
                 QBook
             </a>
         </div>
-        <div class="mx-5">
+        <div class="mx-5 d-flex flex-row align-items-center gap-4">
             <?php if(isset($_SESSION["user"])) : ?>
+                <?php if($_REQUEST["action"] === "home") : ?>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                        + Réserver une salle
+                    </button>
+                <?php endif; ?>
                 <a <?= \services\Utils::askConfirmation("Êtes vous sûr de voulloir vous déconnecter ?") ?> href="index.php?action=logoff">Déconnexion</a>
             <?php endif; ?>
         </div>
