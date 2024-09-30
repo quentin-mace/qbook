@@ -2,20 +2,35 @@
 
 namespace services;
 
+use DateTime;
+use IntlDateFormatter;
+
 /**
  * Utility class : this class only contains static methods.
  * Example : Utils::redirect('home');
  */
 class Utils {
+    const DATE_SHORT_FORMAT = 0;
+    const DATE_FULL_FORMAT = 1;
+
+    public static function formatDate(int $format, DateTime $date): string
+    {
+        return match ($format) {
+            self::DATE_SHORT_FORMAT => $date->format("d/m/Y"),
+            self::DATE_FULL_FORMAT => self::convertDateToFrenchFormat($date),
+        };
+    }
+
+
     /**
-     * Convert a date to a format like "Samedi 15 juillet 2023" in French.
+     * Convert a date to a format like "15 juillet 2023" in French.
      * @param DateTime $date : date to convert.
      * @return string : converted date.
      */
     public static function convertDateToFrenchFormat(DateTime $date) : string
     {
         $dateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
-        $dateFormatter->setPattern('EEEE d MMMM Y');
+        $dateFormatter->setPattern('d MMMM Y');
         return $dateFormatter->format($date);
     }
 

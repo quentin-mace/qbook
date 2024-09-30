@@ -5,6 +5,7 @@ namespace lib\models;
 use DateTime;
 use Exception;
 use lib\models\AbstractEntity;
+use services\Utils;
 
 class Booking extends AbstractEntity
 {
@@ -93,10 +94,37 @@ class Booking extends AbstractEntity
     /**
      * @throws Exception
      */
-    public function getFormatedStartDate(): string
+    public function getFormatedStartDate(int $format): string
     {
         $startDate = $this->startAt;
-        return $startDate->format("d/m/Y");
+        return Utils::formatDate($format, $startDate);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getFormatedStartHour(): string
+    {
+        $startDate = $this->startAt;
+        return $startDate->format("H\hi");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getFormatedEndDate(int $format): string
+    {
+        $endDate = $this->endAt;
+        return Utils::formatDate($format, $endDate);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getFormatedEndHour(): string
+    {
+        $endDate = $this->endAt;
+        return $endDate->format("H\hi");
     }
 
     /**

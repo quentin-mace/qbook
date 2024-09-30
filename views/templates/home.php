@@ -17,9 +17,9 @@
             </thead>
             <tbody class="">
                 <?php foreach ($bookings as $booking): ?>
-                    <tr class="row-link" onclick="window.location='index.php?action=home';">
+                    <tr class="row-link" data-bs-toggle="modal" data-bs-target="#showModal<?= $booking->getId(); ?>";">
                         <th scope="row"><?= ucfirst($booking->getRoomName()); ?></th>
-                        <td><?= $booking->getFormatedStartDate(); ?></td>
+                        <td><?= $booking->getFormatedStartDate(\services\Utils::DATE_SHORT_FORMAT); ?></td>
                         <td><?= $booking->getUserName(); ?></td>
                         <td><?= $booking->getTitle(); ?></td>
                         <td><?= $booking->getParticipantsCount(); ?></td>
@@ -29,3 +29,33 @@
         </table>
     </div>
 </section>
+
+<!-- Show Modals -->
+<?php foreach ($bookings as $booking): ?>
+    <div class="modal fade" id="showModal<?= $booking->getId(); ?>" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title d-flex flex-column">
+                        <h2 class="fs-4" id="showModalLabel"><?= $booking->getTitle(); ?></h2>
+                        <h3 class="fs-6 text-primary"><?= ucfirst($booking->getRoomName()); ?></h3>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center my-5">
+                    <p class="fs-5"><strong class="fs-4 text-primary"><?= $booking->getParticipantsCount(); ?></strong> Participants</p>
+                    <div class="d-flex flex-row gap-5">
+                        <div>
+                            <p>Du <strong class="fs-4 text-primary"><?= $booking->getFormatedStartDate(\services\Utils::DATE_FULL_FORMAT); ?></strong></p>
+                            <p>A <strong class="fs-4 text-primary"><?= $booking->getFormatedStartHour(); ?></strong></p>
+                        </div>
+                        <div>
+                            <p>Au <strong class="fs-4 text-primary"><?= $booking->getFormatedEndDate(\services\Utils::DATE_FULL_FORMAT); ?></strong></p>
+                            <p>A <strong class="fs-4 text-primary"><?= $booking->getFormatedEndHour(); ?></strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

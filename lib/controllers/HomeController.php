@@ -127,6 +127,7 @@ class HomeController
             $view = new View("Créer un compte");
             $view->render("signin");
         }
+        exit();
     }
 
     /**
@@ -156,7 +157,7 @@ class HomeController
 
         $userManager = new UserManager();
         if($userManager->getByEmail($email)){
-            $this->showSignin("Cette adresse email est déja associée à compte !");
+            $this->showSignin("Cette adresse email est déja associée à un compte !");
         }
 
         $user = new User();
