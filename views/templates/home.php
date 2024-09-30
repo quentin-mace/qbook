@@ -33,7 +33,7 @@
 <!-- Show Modals -->
 <?php foreach ($bookings as $booking): ?>
     <div class="modal fade" id="showModal<?= $booking->getId(); ?>" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="modal-title d-flex flex-column">
