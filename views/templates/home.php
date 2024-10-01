@@ -55,6 +55,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <?php if($user->getRoleId() === \lib\models\User::ADMIN || $booking->getUserId() === $user->getId()): ?>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<?= $booking->getId(); ?>">Modifier</button>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

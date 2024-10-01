@@ -26,10 +26,14 @@ class HomeController
         $bookingManager = new BookingManager();
         $bookings = $bookingManager->getBookings();
 
+        $userManager = new UserManager();
+        $user = $userManager->getById($_SESSION["user"]);
+
         $view = new View("Réservations");
         $view->render("home",[
             'bookings' => $bookings,
             'infoMessage' => $infoMessage,
+            'user' => $user,
         ]);
     }
 
@@ -82,6 +86,7 @@ class HomeController
     {
         if (!isset($_SESSION['user'])) {
             Utils::redirect("login");
+            exit();
         }
     }
 

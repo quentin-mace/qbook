@@ -6,6 +6,8 @@ use lib\models\AbstractEntity;
 
 class User extends AbstractEntity
 {
+    const ADMIN = 2;
+    const USER = 1;
     private int $roleId;
     private string $name;
     private string $email;
