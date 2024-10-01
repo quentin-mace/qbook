@@ -37,8 +37,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="modal-title d-flex flex-column">
-                        <h2 class="fs-4" id="showModalLabel"><?= $booking->getTitle(); ?></h2>
-                        <h3 class="fs-6 text-primary"><?= ucfirst($booking->getRoomName()); ?></h3>
+                        <h2 class="fs-2" id="showModalLabel"><?= $booking->getTitle(); ?></h2>
+                        <h3 class="fs-4 text-primary"><?= ucfirst($booking->getRoomName()); ?></h3>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
