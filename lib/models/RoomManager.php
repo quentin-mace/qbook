@@ -5,6 +5,7 @@ namespace lib\models;
 
 use Exception;
 use lib\models\AbstractEntityManager;
+use PDO;
 
 class RoomManager extends AbstractEntityManager
 {
@@ -19,5 +20,18 @@ class RoomManager extends AbstractEntityManager
             throw new Exception("Room {$id} not found");
         }
         return $room;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAll() : array
+    {
+        $sql = "SELECT * FROM rooms";
+        $rooms = $this->db->query($sql)->fetchAll(PDO::FETCH_CLASS, 'lib\models\Room');
+        if(!$rooms){
+            throw new Exception("No rooms found");
+        }
+        return $rooms;
     }
 }

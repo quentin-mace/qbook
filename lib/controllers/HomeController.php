@@ -4,6 +4,7 @@ namespace lib\controllers;
 
 use Exception;
 use lib\models\BookingManager;
+use lib\models\RoomManager;
 use lib\models\User;
 use lib\models\UserManager;
 use services\Utils;
@@ -29,11 +30,17 @@ class HomeController
         $userManager = new UserManager();
         $user = $userManager->getById($_SESSION["user"]);
 
+        $roomManager = new RoomManager();
+        $rooms = $roomManager->getAll();
+
+        Utils::betterDump($_REQUEST);
+
         $view = new View("Réservations");
         $view->render("home",[
             'bookings' => $bookings,
             'infoMessage' => $infoMessage,
             'user' => $user,
+            'rooms' => $rooms
         ]);
     }
 

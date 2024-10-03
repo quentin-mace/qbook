@@ -12,12 +12,16 @@ use IntlDateFormatter;
 class Utils {
     const DATE_SHORT_FORMAT = 0;
     const DATE_FULL_FORMAT = 1;
+    const DATE_HTML_VALUE = 2;
+    const DATETIME_FORMAT = 3;
 
     public static function formatDate(int $format, DateTime $date): string
     {
         return match ($format) {
             self::DATE_SHORT_FORMAT => $date->format("d/m/Y"),
             self::DATE_FULL_FORMAT => self::convertDateToFrenchFormat($date),
+            self::DATE_HTML_VALUE => $date->format("Y-m-d"),
+            self::DATETIME_FORMAT => $date->format("Y-m-d H:i:s"),
         };
     }
 
@@ -123,5 +127,12 @@ class Utils {
             <a href='index.php?action=monitoring&column={$column}&order=asc'><i class='fa-solid fa-caret-up' style='color: #efe1ba;'></i></a>
             <a href='index.php?action=monitoring&column={$column}&order=desc'><i class='fa-solid fa-caret-down' style='color: #efe1ba;'></i></a>
         ";
+    }
+
+    public static function betterDump($var): void
+    {
+        echo '<pre>';
+        var_dump($var);
+        echo '</pre>';
     }
 }
