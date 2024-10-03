@@ -13,11 +13,19 @@ Autoloader::register();
 // We get which action is asked
 
 $action = "home";
+$message = null;
+$parameters = null;
 
-$parameters = $_GET;
+if(isset($_SESSION['post_data'])){
+    $parameters = $_SESSION['post_data'];
+    unset($_SESSION['post_data']);
+}
 
-if(isset($parameters["action"])){
-    $action = $parameters["action"];
+if(isset($_GET["action"])){
+    $action = $_GET["action"];
+}
+if(isset($parameters["message"])){
+    $message = $parameters["message"];
 }
 
 
@@ -27,11 +35,11 @@ try {
     switch ($action) {
         case "home":
             $homeController = new HomeController();
-            $homeController->showHome();
+            $homeController->showHome($message);
             break;
         case "login":
             $homeController = new HomeController();
-            $homeController->showLogin();
+            $homeController->showLogin($message);
             break;
         case "confirmLogin":
             $homeController = new HomeController();
@@ -43,11 +51,11 @@ try {
             break;
         case "signin":
             $homeController = new HomeController();
-            $homeController->showSignin();
+            $homeController->showSignin($message);
             break;
         case "confirmSignin":
             $homeController = new HomeController();
-            $homeController->confirmSignin();
+            $homeController->confirmSignin($message);
             break;
         default:
             $errorController = new ErrorController();

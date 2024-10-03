@@ -186,7 +186,8 @@ class HomeController
         $user = $userManager->getByEmail($email);
         $_SESSION["user"] = $user->getId();
 
-        $this->showHome("Votre compte à bien été créé ! Bienvenue {$name} !");
+        Utils::redirect("home", ["message" => "Votre compte à bien été créé ! Bienvenue {$name} !"]);
+        //$this->showHome("Votre compte à bien été créé ! Bienvenue {$name} !");
         exit();
     }
 }
