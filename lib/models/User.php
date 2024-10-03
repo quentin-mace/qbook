@@ -8,19 +8,19 @@ class User extends AbstractEntity
 {
     const ADMIN = 2;
     const USER = 1;
-    private int $roleId;
+    private int $role_id;
     private string $name;
     private string $email;
     private string $password;
 
     public function getRoleId(): int
     {
-        return $this->roleId;
+        return $this->role_id;
     }
 
-    public function setRoleId(int $roleId): void
+    public function setRoleId(int $role_id): void
     {
-        $this->roleId = $roleId;
+        $this->role_id = $role_id;
     }
 
     public function getName(): string
