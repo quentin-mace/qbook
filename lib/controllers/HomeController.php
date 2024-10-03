@@ -55,7 +55,7 @@ class HomeController
         $password = Utils::request("password");
 
         if(!$email || !$password){
-            Utils::redirect("showLogin",[
+            Utils::redirect("login",[
                 "message" => "Email ou mot de passe non remplis.",
                 "email" => $email
             ]);
@@ -65,14 +65,13 @@ class HomeController
         $user = $userManager->getByEmail($email);
 
         if(!$user){
-            Utils::redirect("showLogin",[
+            Utils::redirect("login",[
                 "message" => "L'adresse email <strong>{$email}</strong> n'est associée à aucun compte."
             ]);
         }
 
         if(!password_verify($password, $user->getPassword())){
-            $this->showLogin("Mot de passe incorrect.");
-            Utils::redirect("showLogin",[
+            Utils::redirect("login",[
                 "message" => "Mot de passe incorrect.",
                 "email" => $email
             ]);
@@ -166,7 +165,7 @@ class HomeController
             !$password ||
             !$confirmPassword
         ){
-            Utils::redirect("showSignin",[
+            Utils::redirect("signin",[
                 "message" => "Certains champs sont vides.",
                 "name" => $name,
                 "email" => $email
@@ -175,7 +174,7 @@ class HomeController
         }
 
         if($password != $confirmPassword){
-            Utils::redirect("showSignin",[
+            Utils::redirect("signin",[
                 "message" => "Les mots de passe ne correspondent pas.",
                 "name" => $name,
                 "email" => $email
@@ -184,7 +183,7 @@ class HomeController
 
         $userManager = new UserManager();
         if($userManager->getByEmail($email)){
-            Utils::redirect("showSignin",[
+            Utils::redirect("signin",[
                 "message" => "Cette adresse email est déja associée à un compte !",
                 "name" => $name
             ]);
@@ -198,7 +197,7 @@ class HomeController
         $result = $userManager->addUser($user);
 
         if (!$result) {
-            Utils::redirect("showSignin",[
+            Utils::redirect("signin",[
                 "message" => "Création du compte impossible. Contactez l'administrateur.",
                 "name" => $name,
                 "email" => $email
