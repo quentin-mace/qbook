@@ -55,19 +55,27 @@ class HomeController
         $password = Utils::request("password");
 
         if(!$email || !$password){
-            $this->showLogin("Email ou mot de passe non remplis.");
+            Utils::redirect("showLogin",[
+                "message" => "Email ou mot de passe non remplis.",
+                "email" => $email
+            ]);
         }
 
         $userManager = new UserManager();
         $user = $userManager->getByEmail($email);
 
         if(!$user){
-            $homeController = new HomeController();
-            $homeController->showLogin("L'adresse email <strong>{$email}</strong> n'est associée à aucun compte.");
+            Utils::redirect("showLogin",[
+                "message" => "L'adresse email <strong>{$email}</strong> n'est associée à aucun compte."
+            ]);
         }
 
         if(!password_verify($password, $user->getPassword())){
             $this->showLogin("Mot de passe incorrect.");
+            Utils::redirect("showLogin",[
+                "message" => "Mot de passe incorrect.",
+                "email" => $email
+            ]);
         }
 
         $_SESSION["user"] = $user->getId();
@@ -105,8 +113,8 @@ class HomeController
      */
     public function showLogin(string $errorMessage = null): void
     {
+        $view = new View("Connexion");
         if(isset($errorMessage)){
-            $view = new View("Connexion");
             $view->render(
                 "login",
                 [
@@ -114,7 +122,6 @@ class HomeController
                 ]
             );
         } else {
-            $view = new View("Connexion");
             $view->render("login");
         }
     }
@@ -127,8 +134,8 @@ class HomeController
      */
     public function showSignin(string $errorMessage = null): void
     {
+        $view = new View("Créer un compte");
         if(isset($errorMessage)){
-            $view = new View("Créer un compte");
             $view->render(
                 "signin",
                 [
@@ -136,7 +143,6 @@ class HomeController
                 ]
             );
         } else {
-            $view = new View("Créer un compte");
             $view->render("signin");
         }
         exit();
@@ -160,16 +166,28 @@ class HomeController
             !$password ||
             !$confirmPassword
         ){
-            $this->showSignin("Certains champs sont vides.");
+            Utils::redirect("showSignin",[
+                "message" => "Certains champs sont vides.",
+                "name" => $name,
+                "email" => $email
+            ]);
+
         }
 
         if($password != $confirmPassword){
-            $this->showSignin("Les mots de passe ne correspondent pas.");
+            Utils::redirect("showSignin",[
+                "message" => "Les mots de passe ne correspondent pas.",
+                "name" => $name,
+                "email" => $email
+            ]);
         }
 
         $userManager = new UserManager();
         if($userManager->getByEmail($email)){
-            $this->showSignin("Cette adresse email est déja associée à un compte !");
+            Utils::redirect("showSignin",[
+                "message" => "Cette adresse email est déja associée à un compte !",
+                "name" => $name
+            ]);
         }
 
         $user = new User();
@@ -180,14 +198,17 @@ class HomeController
         $result = $userManager->addUser($user);
 
         if (!$result) {
-            $this->showSignin("Création du compte impossible. Contactez l'administrateur.");
+            Utils::redirect("showSignin",[
+                "message" => "Création du compte impossible. Contactez l'administrateur.",
+                "name" => $name,
+                "email" => $email
+            ]);
         }
 
         $user = $userManager->getByEmail($email);
         $_SESSION["user"] = $user->getId();
 
         Utils::redirect("home", ["message" => "Votre compte à bien été créé ! Bienvenue {$name} !"]);
-        //$this->showHome("Votre compte à bien été créé ! Bienvenue {$name} !");
         exit();
     }
 }

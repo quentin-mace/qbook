@@ -103,7 +103,13 @@ class Utils {
      */
     public static function request(string $variableName, mixed $defaultValue = null) : mixed
     {
-        return $_REQUEST[$variableName] ?? $defaultValue;
+        if(isset($_REQUEST[$variableName])) {
+            return $_REQUEST[$variableName];
+        } elseif (isset($parameters[$variableName])) {
+            return $parameters[$variableName];
+        } else {
+            return $defaultValue;
+        }
     }
 
 
