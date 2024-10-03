@@ -33,7 +33,7 @@ class HomeController
         $roomManager = new RoomManager();
         $rooms = $roomManager->getAll();
 
-        Utils::betterDump($_REQUEST);
+        //Utils::betterDump($_REQUEST);
 
         $view = new View("Réservations");
         $view->render("home",[
@@ -187,5 +187,6 @@ class HomeController
         $_SESSION["user"] = $user->getId();
 
         $this->showHome("Votre compte à bien été créé ! Bienvenue {$name} !");
+        exit();
     }
 }
