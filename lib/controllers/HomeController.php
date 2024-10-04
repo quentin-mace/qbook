@@ -227,6 +227,11 @@ class HomeController
         $booking->setParticipantsCount(Utils::request("participantCount"));
 
         $bookingManager = new BookingManager();
+        $sameTimeBooking = $bookingManager->selectBetweenDatesForRoom($booking);
+        if($sameTimeBooking && $sameTimeBooking->getId() !== $booking->getId() ){
+            Utils::redirect("home", ["error"=>"Impossible de modifier la réservation. La salle est déja réservée sur cette nouvelle période"]);
+        }
+
         $response = $bookingManager->updateBooking($booking);
 
         if (!$response) {

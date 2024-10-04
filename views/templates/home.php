@@ -84,7 +84,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex flex-column align-items-center justify-content-center my-5">
-                    <form id="editBooking" class="my-3 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=updateBooking&id=<?= $booking->getId(); ?>" method="post">
+                    <form id="editBooking<?= $booking->getId(); ?>" class="my-3 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=updateBooking&id=<?= $booking->getId(); ?>" method="post">
                         <div class="my-3 w-50">
                             <label for="title" hidden="hidden">Nom de la réservation</label>
                             <input type="text" class="form-control" id="title" aria-describedby="textHelp" placeholder="Nom de la réservation" name="title" value="<?= $booking->getTitle(); ?>" required>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#showModal<?= $booking->getId(); ?>">Annuler</button>
-                    <input type="submit" form="editBooking" class="btn btn-primary">
+                    <input type="submit" form="editBooking<?= $booking->getId(); ?>" class="btn btn-primary">
                 </div>
             </div>
         </div>

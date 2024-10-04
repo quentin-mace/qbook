@@ -34,7 +34,7 @@ if(isset($parameters["error"])){
 
 
 // We call the proper controller depending on which action is passed
-
+// TODO: Refacto where the message is an error
 try {
     switch ($action) {
         case "home":
