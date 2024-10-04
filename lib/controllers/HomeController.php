@@ -3,6 +3,7 @@
 namespace lib\controllers;
 
 use Exception;
+use lib\models\Booking;
 use lib\models\BookingManager;
 use lib\models\RoomManager;
 use lib\models\User;
@@ -32,8 +33,6 @@ class HomeController
 
         $roomManager = new RoomManager();
         $rooms = $roomManager->getAll();
-
-        //Utils::betterDump($_REQUEST);
 
         $view = new View("Réservations");
         $view->render("home",[
@@ -209,5 +208,52 @@ class HomeController
 
         Utils::redirect("home", ["message" => "Votre compte à bien été créé ! Bienvenue {$name} !"]);
         exit();
+    }
+
+    /**
+     * Update a booking, based on the form submitted in POST
+     * @throws Exception
+     */
+    public function updateBooking(): void
+    {
+        $booking = new Booking();
+        $booking->setId(Utils::request("id"));
+        $booking->setUserId($_SESSION["user"]);
+        $booking->setRoomId(Utils::request("roomSelected"));
+        $booking->setTitle(htmlspecialchars(Utils::request("title")));
+        $booking->setStartAt(Utils::request("startDate"));
+        $booking->setEndAt(Utils::request("endDate"));
+        $booking->setParticipantsCount(Utils::request("participantCount"));
+
+        $bookingManager = new BookingManager();
+        $response = $bookingManager->updateBooking($booking);
+
+        if (!$response) {
+            throw new Exception("Une erreur à eu lieu lors de la mise à jour. Veuillez contacter un administrateur.");
+        }
+        Utils::redirect("home", ["message"=>"Votre réservation à été mise à jour avec succès !"]);
+    }
+
+    /**
+     * Create a booking, based on the form submitted in POST
+     * @throws Exception
+     */
+    public function createBooking(): void
+    {
+        $booking = new Booking();
+        $booking->setUserId($_SESSION["user"]);
+        $booking->setRoomId(Utils::request("roomSelected"));
+        $booking->setTitle(htmlspecialchars(Utils::request("title")));
+        $booking->setStartAt(Utils::request("startDate"));
+        $booking->setEndAt(Utils::request("endDate"));
+        $booking->setParticipantsCount(Utils::request("participantCount"));
+
+        $bookingManager = new BookingManager();
+        $response = $bookingManager->createBooking($booking);
+
+        if (!$response) {
+            throw new Exception("Une erreur à eu lieu lors de votre réservation. Veuillez contacter un administrateur.");
+        }
+        Utils::redirect("home", ["message"=>"Votre réservation à été créée avec succès !"]);
     }
 }

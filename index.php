@@ -57,6 +57,14 @@ try {
             $homeController = new HomeController();
             $homeController->confirmSignin();
             break;
+        case "updateBooking":
+            $homeController = new HomeController();
+            $homeController->updateBooking();
+            break;
+        case "createBooking":
+            $homeController = new HomeController();
+            $homeController->createBooking();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();
