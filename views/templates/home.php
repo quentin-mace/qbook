@@ -4,6 +4,11 @@
             <?= $infoMessage ?>
         </div>
     <?php endif; ?>
+    <?php if(isset($errorMessage)): ?>
+        <div class="alert alert-danger mt-4 mb-4" role="alert">
+            <?= $errorMessage ?>
+        </div>
+    <?php endif; ?>
     <div class="h-100 d-flex align-items-center justify-content-center flex-column w-100">
         <table class="table table-striped table-hover table-borderless w-100 position-relative" style="top: -100px">
             <thead class="table-secondary text-uppercase">

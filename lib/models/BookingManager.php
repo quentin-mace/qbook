@@ -2,6 +2,7 @@
 
 namespace lib\models;
 
+use DateTime;
 use lib\models\AbstractEntityManager;
 
 class BookingManager extends AbstractEntityManager
@@ -52,5 +53,22 @@ class BookingManager extends AbstractEntityManager
             "participants_count" => $booking->getParticipantsCount()
         ]);
         return $response->rowCount() > 0;
+    }
+
+    public function selectBetweenDatesForRoom(Booking $booking): ?Booking
+    {
+        $sql = "SELECT * FROM bookings 
+                WHERE (`start_at` BETWEEN :start AND :end
+                OR `end_at` BETWEEN :start AND :end
+                OR :start BETWEEN `start_at` AND `end_at`
+                OR :end BETWEEN `start_at` AND `end_at`)
+                AND `room_id` = :room_id;";
+        $response = $this->db->query($sql,[
+            "room_id" => $booking->getRoomId(),
+            "start" => $booking->getStartAt()->format('Y-m-d H:i:s'),
+            "end" => $booking->getEndAt()->format('Y-m-d H:i:s'),
+        ])
+        ->fetchObject("lib\models\Booking");
+        return $response ?? null;
     }
 }

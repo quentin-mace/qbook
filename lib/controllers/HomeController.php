@@ -21,7 +21,7 @@ class HomeController
      * @return void
      * @throws Exception
      */
-    public function showHome(string $infoMessage = null): void
+    public function showHome(string $infoMessage = null, string $errorMessage = null): void
     {
         $this->checkIfUserIsConnected();
 
@@ -38,6 +38,7 @@ class HomeController
         $view->render("home",[
             'bookings' => $bookings,
             'infoMessage' => $infoMessage,
+            'errorMessage' => $errorMessage,
             'user' => $user,
             'rooms' => $rooms
         ]);
@@ -249,6 +250,10 @@ class HomeController
         $booking->setParticipantsCount(Utils::request("participantCount"));
 
         $bookingManager = new BookingManager();
+        $sameTimeBooking = $bookingManager->selectBetweenDatesForRoom($booking);
+        if($sameTimeBooking){
+            Utils::redirect("home", ["error"=>"Réservation impossible. La salle est déja occupée sur cette période"]);
+        }
         $response = $bookingManager->createBooking($booking);
 
         if (!$response) {

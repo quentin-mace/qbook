@@ -15,6 +15,7 @@ Autoloader::register();
 $action = "home";
 $message = null;
 $parameters = null;
+$error = null;
 
 if(isset($_SESSION['post_data'])){
     $parameters = $_SESSION['post_data'];
@@ -27,6 +28,9 @@ if(isset($_GET["action"])){
 if(isset($parameters["message"])){
     $message = $parameters["message"];
 }
+if(isset($parameters["error"])){
+    $error = $parameters["error"];
+}
 
 
 // We call the proper controller depending on which action is passed
@@ -35,7 +39,7 @@ try {
     switch ($action) {
         case "home":
             $homeController = new HomeController();
-            $homeController->showHome($message);
+            $homeController->showHome($message, $error);
             break;
         case "login":
             $homeController = new HomeController();
