@@ -231,6 +231,16 @@ class HomeController
             Utils::redirect("home", ["error"=>"Impossible de modifier la réservation. La salle est déja réservée sur cette nouvelle période"]);
         }
 
+        $roomManager = new RoomManager();
+        $room = $roomManager->getById($booking->getRoomId());
+        if($booking->getParticipantsCount() > $room->getCapacity()){
+            Utils::redirect(
+                "home",
+                [
+                    "error"=>"Modification impossible. Cette salle ne peut pas accueillir plus de <strong>{$room->getCapacity()}</strong> personnes"
+                ]);
+        }
+
         $response = $bookingManager->updateBooking($booking);
 
         if (!$response) {
@@ -250,15 +260,25 @@ class HomeController
 
         $bookingManager = new BookingManager();
         $sameTimeBooking = $bookingManager->selectBetweenDatesForRoom($booking);
-
         if($sameTimeBooking){
             Utils::redirect("home", ["error"=>"Réservation impossible. La salle est déja occupée sur cette période"]);
         }
-        $response = $bookingManager->createBooking($booking);
 
+        $roomManager = new RoomManager();
+        $room = $roomManager->getById($booking->getRoomId());
+        if($booking->getParticipantsCount() > $room->getCapacity()){
+            Utils::redirect(
+                "home",
+                [
+                    "error"=>"Réservation impossible. Cette salle ne peut pas accueillir plus de <strong>{$room->getCapacity()}</strong> personnes"
+                ]);
+        }
+
+        $response = $bookingManager->createBooking($booking);
         if (!$response) {
             throw new Exception("Une erreur à eu lieu lors de votre réservation. Veuillez contacter un administrateur.");
         }
+
         Utils::redirect("home", ["message"=>"Votre réservation à été créée avec succès !"]);
     }
 
