@@ -69,6 +69,10 @@ try {
             $homeController = new HomeController();
             $homeController->createBooking();
             break;
+        case "deleteBooking":
+            $homeController = new HomeController();
+            $homeController->deleteBooking();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();

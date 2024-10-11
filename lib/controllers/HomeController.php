@@ -250,6 +250,7 @@ class HomeController
 
         $bookingManager = new BookingManager();
         $sameTimeBooking = $bookingManager->selectBetweenDatesForRoom($booking);
+
         if($sameTimeBooking){
             Utils::redirect("home", ["error"=>"Réservation impossible. La salle est déja occupée sur cette période"]);
         }
@@ -259,5 +260,24 @@ class HomeController
             throw new Exception("Une erreur à eu lieu lors de votre réservation. Veuillez contacter un administrateur.");
         }
         Utils::redirect("home", ["message"=>"Votre réservation à été créée avec succès !"]);
+    }
+
+    /**
+     * Deletes a booking
+     * @throws Exception
+     */
+    public function deleteBooking()
+    {
+        $bookingId = Utils::request("id");
+        $bookingManager = new BookingManager();
+        $result = $bookingManager->deleteBooking($bookingId );
+
+        if (!$result) {
+            throw new Exception("Une erreur à eu lieu lors de votre réservation. Veuillez contacter un administrateur.");
+        }
+
+        Utils::redirect("home", [
+            "message" => "La réservation à bien été supprimée"
+        ]);
     }
 }
