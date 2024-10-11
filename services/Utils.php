@@ -47,9 +47,6 @@ class Utils {
     public static function redirect(string $action, array $params = []) : void
     {
         $url = "index.php?action=$action";
-        /*foreach ($params as $paramName => $paramValue) {
-            $url .= "&$paramName=$paramValue";
-        }*/
 
         // Stocker les paramètres dans la session
         $_SESSION['post_data'] = $params;

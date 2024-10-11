@@ -4,6 +4,7 @@ namespace lib\models;
 
 use DateTime;
 use lib\models\AbstractEntityManager;
+use PDO;
 
 class BookingManager extends AbstractEntityManager
 {
@@ -55,7 +56,7 @@ class BookingManager extends AbstractEntityManager
         return $response->rowCount() > 0;
     }
 
-    public function selectBetweenDatesForRoom(Booking $booking): ?Booking
+    public function selectBetweenDatesForRoom(Booking $booking): Booking|false|null
     {
         $sql = "SELECT * FROM bookings 
                 WHERE (`start_at` BETWEEN :start AND :end

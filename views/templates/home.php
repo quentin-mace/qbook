@@ -22,7 +22,7 @@
             </thead>
             <tbody class="">
                 <?php foreach ($bookings as $booking): ?>
-                    <tr class="row-link" data-bs-toggle="modal" data-bs-target="#showModal<?= $booking->getId(); ?>";">
+                    <tr class="row-link" data-bs-toggle="modal" data-bs-target="#showModal<?= $booking->getId();?>">
                         <th scope="row"><?= ucfirst($booking->getRoomName()); ?></th>
                         <td><?= $booking->getFormatedStartDate(\services\Utils::DATE_SHORT_FORMAT); ?></td>
                         <td><?= $booking->getUserName(); ?></td>
@@ -108,7 +108,7 @@
                             </div>
                             <div class="my-3">
                                 <label for="endDate">Fin</label>
-                                <input type="datetime-local" id="endDate" name="endDate" class="form-control" value="<?= $booking->getFormatedStartDate(\services\Utils::DATETIME_FORMAT); ?>" required>
+                                <input type="datetime-local" id="endDate" name="endDate" class="form-control" value="<?= $booking->getFormatedEndDate(\services\Utils::DATETIME_FORMAT); ?>" required>
                             </div>
                         </div>
                     </form>
