@@ -43,7 +43,7 @@ try {
             break;
         case "login":
             $homeController = new HomeController();
-            $homeController->showLogin($message);
+            $homeController->showLogin($error);
             break;
         case "confirmLogin":
             $homeController = new HomeController();

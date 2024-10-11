@@ -18,6 +18,8 @@ class HomeController
 {
     /**
      * Displays the homepage.
+     * @param string|null $infoMessage : Informative flash message (Optional)
+     * @param string|null $errorMessage : Error flash message (Optional)
      * @return void
      * @throws Exception
      */
@@ -56,7 +58,7 @@ class HomeController
 
         if(!$email || !$password){
             Utils::redirect("login",[
-                "message" => "Email ou mot de passe non remplis.",
+                "error" => "Email ou mot de passe non remplis.",
                 "email" => $email
             ]);
         }
@@ -66,20 +68,22 @@ class HomeController
 
         if(!$user){
             Utils::redirect("login",[
-                "message" => "L'adresse email <strong>{$email}</strong> n'est associée à aucun compte."
+                "error" => "L'adresse email <strong>$email</strong> n'est associée à aucun compte."
             ]);
         }
 
         if(!password_verify($password, $user->getPassword())){
             Utils::redirect("login",[
-                "message" => "Mot de passe incorrect.",
+                "error" => "Mot de passe incorrect.",
                 "email" => $email
             ]);
         }
 
         $_SESSION["user"] = $user->getId();
 
-        Utils::redirect('home');
+        Utils::redirect('home',[
+            "message" => "Bienvenue, {$user->getName()}"
+        ]);
     }
 
     /**
@@ -207,7 +211,7 @@ class HomeController
         $user = $userManager->getByEmail($email);
         $_SESSION["user"] = $user->getId();
 
-        Utils::redirect("home", ["message" => "Votre compte à bien été créé ! Bienvenue {$name} !"]);
+        Utils::redirect("home", ["message" => "Votre compte à bien été créé ! Bienvenue $name !"]);
         exit();
     }
 
@@ -219,12 +223,7 @@ class HomeController
     {
         $booking = new Booking();
         $booking->setId(Utils::request("id"));
-        $booking->setUserId($_SESSION["user"]);
-        $booking->setRoomId(Utils::request("roomSelected"));
-        $booking->setTitle(htmlspecialchars(Utils::request("title")));
-        $booking->setStartAt(Utils::request("startDate"));
-        $booking->setEndAt(Utils::request("endDate"));
-        $booking->setParticipantsCount(Utils::request("participantCount"));
+        $booking->buildFromRequest();
 
         $bookingManager = new BookingManager();
         $sameTimeBooking = $bookingManager->selectBetweenDatesForRoom($booking);
@@ -247,12 +246,7 @@ class HomeController
     public function createBooking(): void
     {
         $booking = new Booking();
-        $booking->setUserId($_SESSION["user"]);
-        $booking->setRoomId(Utils::request("roomSelected"));
-        $booking->setTitle(htmlspecialchars(Utils::request("title")));
-        $booking->setStartAt(Utils::request("startDate"));
-        $booking->setEndAt(Utils::request("endDate"));
-        $booking->setParticipantsCount(Utils::request("participantCount"));
+        $booking->buildFromRequest();
 
         $bookingManager = new BookingManager();
         $sameTimeBooking = $bookingManager->selectBetweenDatesForRoom($booking);

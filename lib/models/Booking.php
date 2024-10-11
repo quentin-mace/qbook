@@ -135,4 +135,17 @@ class Booking extends AbstractEntity
         $userManager = new UserManager();
         return $userManager->getById($this->userId)->getName();
     }
+
+    /**
+     * @throws Exception
+     */
+    public function buildFromRequest(): void
+    {
+        $this->setUserId($_SESSION["user"]);
+        $this->setRoomId(Utils::request("roomSelected"));
+        $this->setTitle(htmlspecialchars(Utils::request("title")));
+        $this->setStartAt(Utils::request("startDate"));
+        $this->setEndAt(Utils::request("endDate"));
+        $this->setParticipantsCount(Utils::request("participantCount"));
+    }
 }
