@@ -1,5 +1,8 @@
 <section  class="d-flex align-items-center justify-content-start vh-100 flex-column" xmlns="http://www.w3.org/1999/html">
-    <?php if(isset($infoMessage)): ?>
+    <?php use lib\models\User;
+    use services\Utils;
+
+    if(isset($infoMessage)): ?>
         <div class="alert alert-primary mt-4 mb-4" role="alert">
             <?= $infoMessage ?>
         </div>
@@ -24,7 +27,7 @@
                 <?php foreach ($bookings as $booking): ?>
                     <tr class="row-link" data-bs-toggle="modal" data-bs-target="#showModal<?= $booking->getId();?>">
                         <th scope="row"><?= ucfirst($booking->getRoomName()); ?></th>
-                        <td><?= $booking->getFormatedStartDate(\services\Utils::DATE_SHORT_FORMAT); ?></td>
+                        <td><?= $booking->getFormatedStartDate(Utils::DATE_SHORT_FORMAT); ?></td>
                         <td><?= $booking->getUserName(); ?></td>
                         <td><?= $booking->getTitle(); ?></td>
                         <td><?= $booking->getParticipantsCount(); ?></td>
@@ -51,19 +54,20 @@
                     <p class="fs-5"><strong class="fs-4 text-primary"><?= $booking->getParticipantsCount(); ?></strong> Participants</p>
                     <div class="d-flex flex-row gap-5">
                         <div>
-                            <p>Du <strong class="fs-4 text-primary"><?= $booking->getFormatedStartDate(\services\Utils::DATE_FULL_FORMAT); ?></strong></p>
+                            <p>Du <strong class="fs-4 text-primary"><?= $booking->getFormatedStartDate(Utils::DATE_FULL_FORMAT); ?></strong></p>
                             <p>A <strong class="fs-4 text-primary"><?= $booking->getFormatedStartHour(); ?></strong></p>
                         </div>
                         <div>
-                            <p>Au <strong class="fs-4 text-primary"><?= $booking->getFormatedEndDate(\services\Utils::DATE_FULL_FORMAT); ?></strong></p>
+                            <p>Au <strong class="fs-4 text-primary"><?= $booking->getFormatedEndDate(Utils::DATE_FULL_FORMAT); ?></strong></p>
                             <p>A <strong class="fs-4 text-primary"><?= $booking->getFormatedEndHour(); ?></strong></p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <?php if($user->getRoleId() === \lib\models\User::ADMIN || $booking->getUserId() === $user->getId()): ?>
+                    <?php if($user->getRoleId() === User::ADMIN || $booking->getUserId() === $user->getId()): ?>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<?= $booking->getId(); ?>">Modifier</button>
+                        <a type="submit" href="index.php?action=deleteBooking&id=<?= $booking->getId(); ?>" class="btn btn-danger" <?= Utils::askConfirmation("Êtes vous sûr de vouloir supprimer cette réservation ?"); ?>>Supprimer</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -104,11 +108,11 @@
                         <div class="my-3 d-flex flex-row justify-content-center align-items-center gap-4">
                             <div class="my-3">
                                 <label for="startDate">Début</label>
-                                <input type="datetime-local" id="startDate" name="startDate" class="form-control" value="<?= $booking->getFormatedStartDate(\services\Utils::DATETIME_FORMAT); ?>" required>
+                                <input type="datetime-local" id="startDate" name="startDate" class="form-control" value="<?= $booking->getFormatedStartDate(Utils::DATETIME_FORMAT); ?>" required>
                             </div>
                             <div class="my-3">
                                 <label for="endDate">Fin</label>
-                                <input type="datetime-local" id="endDate" name="endDate" class="form-control" value="<?= $booking->getFormatedEndDate(\services\Utils::DATETIME_FORMAT); ?>" required>
+                                <input type="datetime-local" id="endDate" name="endDate" class="form-control" value="<?= $booking->getFormatedEndDate(Utils::DATETIME_FORMAT); ?>" required>
                             </div>
                         </div>
                     </form>
