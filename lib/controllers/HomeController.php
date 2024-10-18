@@ -221,7 +221,9 @@ class HomeController
         $_SESSION["user"] = [
             "id" => $user->getId(),
             "roleId" => $user->getRoleId(),
-            "firstLetter" => ucfirst(substr($user->getName(), 0, 1))
+            "firstLetter" => ucfirst(substr($user->getName(), 0, 1)),
+            "name" => $user->getName(),
+            "email" => $user->getEmail()
         ];
     }
 
