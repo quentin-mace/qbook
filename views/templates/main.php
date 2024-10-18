@@ -38,7 +38,7 @@ use services\Utils;
                 <?php endif; ?>
                 <div class="dropdown">
                     <button class="btn btn-primary rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Q
+                        <?= $_SESSION["user"]["firstLetter"] ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Mon compte</a></li>
