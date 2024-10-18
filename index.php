@@ -55,7 +55,7 @@ try {
             break;
         case "signin":
             $homeController = new HomeController();
-            $homeController->showSignin($message);
+            $homeController->showSignin($error);
             break;
         case "confirmSignin":
             $homeController = new HomeController();
