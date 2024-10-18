@@ -1,3 +1,8 @@
+<?php
+
+use services\Utils;
+
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -31,7 +36,19 @@
                         + Réserver une salle
                     </button>
                 <?php endif; ?>
-                <a <?= \services\Utils::askConfirmation("Êtes vous sûr de voulloir vous déconnecter ?") ?> href="index.php?action=logoff">Déconnexion</a>
+                <div class="dropdown">
+                    <button class="btn btn-primary rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?= $_SESSION["user"]["firstLetter"] ?>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Mon compte</a></li>
+                        <?php if($_SESSION["user"]["roleId"] === 2) : ?>
+                            <li><a class="dropdown-item" href="#">Gestion des salles</a></li>
+                            <li><a class="dropdown-item" href="#">Gestion des utilisateurs</a></li>
+                        <?php endif; ?>
+                        <li><a class="dropdown-item" <?= Utils::askConfirmation("Êtes vous sûr de voulloir vous déconnecter ?") ?> href="index.php?action=logoff">Déconnexion</a></li>
+                    </ul>
+                </div>
             <?php endif; ?>
         </div>
 
