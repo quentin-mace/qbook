@@ -41,7 +41,7 @@ use services\Utils;
                         <?= $_SESSION["user"]["firstLetter"] ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Mon compte</a></li>
+                        <li><a class="dropdown-item" href="index.php?action=account">Mon compte</a></li>
                         <?php if($_SESSION["user"]["roleId"] === 2) : ?>
                             <li><a class="dropdown-item" href="#">Gestion des salles</a></li>
                             <li><a class="dropdown-item" href="#">Gestion des utilisateurs</a></li>
