@@ -141,7 +141,7 @@ class Booking extends AbstractEntity
      */
     public function buildFromRequest(): void
     {
-        $this->setUserId($_SESSION["user"]);
+        $this->setUserId($_SESSION["user"]["id"]);
         $this->setRoomId(Utils::request("roomSelected"));
         $this->setTitle(htmlspecialchars(Utils::request("title")));
         $this->setStartAt(Utils::request("startDate"));

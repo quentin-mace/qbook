@@ -31,7 +31,7 @@ class HomeController
         $bookings = $bookingManager->getBookings();
 
         $userManager = new UserManager();
-        $user = $userManager->getById($_SESSION["user"]);
+        $user = $userManager->getById($_SESSION["user"]["id"]);
 
         $roomManager = new RoomManager();
         $rooms = $roomManager->getAll();
@@ -64,6 +64,7 @@ class HomeController
         }
 
         $userManager = new UserManager();
+        /* @var User $user */
         $user = $userManager->getByEmail($email);
 
         if(!$user){
@@ -79,7 +80,12 @@ class HomeController
             ]);
         }
 
-        $_SESSION["user"] = $user->getId();
+
+
+        $_SESSION["user"] = [
+            "id" => $user->getId(),
+            "roleId" => $user->getRoleId()
+        ];
 
         Utils::redirect('home',[
             "message" => "Bienvenue, {$user->getName()}"
@@ -170,7 +176,7 @@ class HomeController
             !$confirmPassword
         ){
             Utils::redirect("signin",[
-                "message" => "Certains champs sont vides.",
+                "error" => "Certains champs sont vides.",
                 "name" => $name,
                 "email" => $email
             ]);
@@ -179,7 +185,7 @@ class HomeController
 
         if($password != $confirmPassword){
             Utils::redirect("signin",[
-                "message" => "Les mots de passe ne correspondent pas.",
+                "error" => "Les mots de passe ne correspondent pas.",
                 "name" => $name,
                 "email" => $email
             ]);
@@ -188,7 +194,7 @@ class HomeController
         $userManager = new UserManager();
         if($userManager->getByEmail($email)){
             Utils::redirect("signin",[
-                "message" => "Cette adresse email est déja associée à un compte !",
+                "error" => "Cette adresse email est déja associée à un compte !",
                 "name" => $name
             ]);
         }
@@ -202,7 +208,7 @@ class HomeController
 
         if (!$result) {
             Utils::redirect("signin",[
-                "message" => "Création du compte impossible. Contactez l'administrateur.",
+                "error" => "Création du compte impossible. Contactez l'administrateur.",
                 "name" => $name,
                 "email" => $email
             ]);
