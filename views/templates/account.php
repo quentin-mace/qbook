@@ -24,7 +24,7 @@ use services\Utils;
                     </thead>
                     <tbody class="">
                     <?php foreach ($bookings as $booking): ?>
-                        <tr class="row-link" data-bs-toggle="modal">
+                        <tr class="row-link" data-bs-toggle="modal" data-bs-target="#showModal<?= $booking->getId();?>">
                             <th scope="row"><?= ucfirst($booking->getRoomName()); ?></th>
                             <td><?= $booking->getFormatedStartDate(Utils::DATE_SHORT_FORMAT); ?></td>
                             <td><?= $booking->getTitle(); ?></td>
@@ -36,3 +36,7 @@ use services\Utils;
         </div>
     </section>
 </section>
+
+
+<?php require './views/templates/partials/bookingsShowModals.php' ?>
+<?php require './views/templates/partials/bookingsEditModals.php' ?>

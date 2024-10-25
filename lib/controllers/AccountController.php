@@ -4,6 +4,7 @@ namespace lib\controllers;
 
 use Exception;
 use lib\models\BookingManager;
+use lib\models\UserManager;
 use services\Utils;
 use views\View;
 
@@ -17,9 +18,13 @@ class AccountController
         $bookingManager = new BookingManager();
         $bookings = $bookingManager->findByUserId($_SESSION["user"]["id"]);
 
-//        Utils::betterDump($bookings);
+        $userManager = new UserManager();
+        $user = $userManager->getById($_SESSION["user"]["id"]);
 
         $view = new View("Mon Compte");
-        $view->render("account", ["bookings" => $bookings]);
+        $view->render("account", [
+            "bookings" => $bookings,
+            "user" => $user,
+        ]);
     }
 }
