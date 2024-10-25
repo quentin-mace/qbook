@@ -79,4 +79,17 @@ class BookingManager extends AbstractEntityManager
         ->fetchObject("lib\models\Booking");
         return $response ?? null;
     }
+
+    public function findByUserId(int $userId): array
+    {
+        $sql = "SELECT * FROM bookings WHERE user_id = :user_id;";
+        $response = $this->db->query($sql,["user_id" => $userId]);
+        $bookings = [];
+
+        while ($booking = $response->fetch())
+        {
+            $bookings[] = new Booking($booking);
+        }
+        return $bookings;
+    }
 }

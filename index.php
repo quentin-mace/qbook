@@ -1,5 +1,6 @@
 <?php
 use config\Autoloader;
+use lib\controllers\AccountController;
 use lib\controllers\ErrorController;
 use lib\controllers\HomeController;
 
@@ -72,6 +73,10 @@ try {
         case "deleteBooking":
             $homeController = new HomeController();
             $homeController->deleteBooking();
+            break;
+        case "account":
+            $accountController = new AccountController();
+            $accountController->showAccount($message, $error);
             break;
         default:
             $errorController = new ErrorController();
