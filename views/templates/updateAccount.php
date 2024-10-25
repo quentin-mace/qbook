@@ -1,12 +1,17 @@
-<section class="d-flex align-items-center justify-content-center vh-100 flex-column" xmlns="http://www.w3.org/1999/html">
+<section class="d-flex align-items-center justify-content-center vh-100 flex-column">
     <?php if(isset($errorMessage)): ?>
         <div class="alert alert-danger" role="alert">
             <?= $errorMessage ?>
         </div>
     <?php endif; ?>
+    <?php if(isset($infoMessage)): ?>
+        <div class="alert alert-primary" role="alert">
+            <?= $infoMessage ?>
+        </div>
+    <?php endif; ?>
 
     <h2 class="my-5 text-center">Mettre à jour mon compte</h2>
-    <form class="my-3 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=updateAccountInfo" method="post">
+    <form class="my-1 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=updateAccountInfo" method="post">
         <div class="my-3 w-50">
             <label for="name" hidden="hidden">Name</label>
             <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Nom" name="name" value="<?= $user->getName(); ?>" required>
@@ -17,7 +22,8 @@
         </div>
         <button class="btn btn-primary my-5">Mettre à jour</button>
     </form>
-    <form class="my-3 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=updatePassword" method="post">
+
+    <form class="my-1 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=updatePassword" method="post">
         <div class="my-3 w-50">
             <label for="oldPassword" hidden="hidden">Old Password</label>
             <input type="password" class="form-control" id="oldPassword" aria-describedby="oldPasswordHelp" placeholder="Ancien mot de passe" name="oldPassword" required>

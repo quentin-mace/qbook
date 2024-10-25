@@ -25,6 +25,8 @@ class AccountController
         $view->render("account", [
             "bookings" => $bookings,
             "user" => $user,
+            "infoMessage" => $infoMessage,
+            "errorMessage" => $errorMessage
         ]);
     }
 
@@ -40,6 +42,41 @@ class AccountController
         $view = new View("Mon Compte");
         $view->render("updateAccount", [
             "user" => $user,
+            "infoMessage" => $infoMessage,
+            "errorMessage" => $errorMessage,
         ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function updateAccountInfo(): void
+    {
+        $name = Utils::request("name");
+        $email = Utils::request("email");
+
+        if (!$name || !$email) {
+            Utils::redirect("updateAccount", ["error" => "Certains champs sont vides"]);
+        }
+
+        $userManager = new UserManager();
+        $sameEmailAccount = $userManager->getByEmail($email);
+        if ($sameEmailAccount && $sameEmailAccount->getId() !== $_SESSION["user"]["id"]) {
+            Utils::redirect("updateAccount", ["error" => "Cet email est déja utilisé par un autre compte"]);
+        }
+
+        $user = $userManager->getById($_SESSION["user"]["id"]);
+        $user->setName($name);
+        $user->setEmail($email);
+
+        $response = $userManager->updateUser($user);
+        if (!$response) {
+            throw new Exception("Une erreur à eu lieu lors de la sauvegarde. Veuillez contacter un administrateur.");
+        }
+
+        $homeController = new HomeController();
+        $homeController->stockUserSession($user);
+
+        Utils::redirect("updateAccount", ["message" => "Votre compte à bien été modifié."]);
     }
 }

@@ -216,7 +216,7 @@ class HomeController
         exit();
     }
 
-    private function stockUserSession(User $user): void
+    public function stockUserSession(User $user): void
     {
         $_SESSION["user"] = [
             "id" => $user->getId(),

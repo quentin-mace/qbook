@@ -35,7 +35,6 @@ if(isset($parameters["error"])){
 
 
 // We call the proper controller depending on which action is passed
-// TODO: Refacto where the message is an error
 try {
     switch ($action) {
         case "home":
@@ -81,6 +80,10 @@ try {
         case "updateAccount":
             $accountController = new AccountController();
             $accountController->showUpdateAccount($message, $error);
+            break;
+        case "updateAccountInfo":
+            $accountController = new AccountController();
+            $accountController->updateAccountInfo();
             break;
         default:
             $errorController = new ErrorController();

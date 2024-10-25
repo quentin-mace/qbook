@@ -5,9 +5,9 @@ use services\Utils;
 ?>
 <section class="d-flex flex-row align-items-center justify-content-around gap-5 vh-100">
     <section class="d-flex flex-column align-items-center justify-content-center gap-2">
-        <p class="fs-1 bg-primary text-light rounded-circle d-flex justify-content-center align-items-center" style="width: 100px; height: 100px;"><?= $_SESSION["user"]["firstLetter"] ?></p>
-        <h2 class="fs-2"><?= $_SESSION["user"]["name"] ?></h2>
-        <p class="text-primary"><?= $_SESSION["user"]["email"] ?></p>
+        <p class="fs-1 bg-primary text-light rounded-circle d-flex justify-content-center align-items-center" style="width: 100px; height: 100px;"><?= ucfirst(substr($user->getName(), 0, 1)) ?></p>
+        <h2 class="fs-2"><?= $user->getName(); ?></h2>
+        <p class="text-primary"><?= $user->getEmail(); ?></p>
         <button type="button" class="btn btn-primary" onclick="window.location.href='index.php?action=updateAccount'">Modifier le profil</button>
     </section>
     <section class="d-flex flex-column align-items-center justify-content-center">
