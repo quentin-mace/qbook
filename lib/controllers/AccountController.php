@@ -27,4 +27,14 @@ class AccountController
             "user" => $user,
         ]);
     }
+
+
+    /**
+     * @throws Exception
+     */
+    public function showUpdateAccount(string $infoMessage = null, string $errorMessage = null): void
+    {
+        $view = new View("Mon Compte");
+        $view->render("updateAccount", []);
+    }
 }

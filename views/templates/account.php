@@ -8,7 +8,7 @@ use services\Utils;
         <p class="fs-1 bg-primary text-light rounded-circle d-flex justify-content-center align-items-center" style="width: 100px; height: 100px;"><?= $_SESSION["user"]["firstLetter"] ?></p>
         <h2 class="fs-2"><?= $_SESSION["user"]["name"] ?></h2>
         <p class="text-primary"><?= $_SESSION["user"]["email"] ?></p>
-        <button type="button" class="btn btn-primary">Modifier le profil</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='index.php?action=updateAccount'">Modifier le profil</button>
     </section>
     <section class="d-flex flex-column align-items-center justify-content-center">
         <div>

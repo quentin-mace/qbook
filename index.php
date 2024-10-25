@@ -78,6 +78,10 @@ try {
             $accountController = new AccountController();
             $accountController->showAccount($message, $error);
             break;
+        case "updateAccount":
+            $accountController = new AccountController();
+            $accountController->showUpdateAccount($message, $error);
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();
