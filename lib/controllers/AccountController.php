@@ -34,7 +34,12 @@ class AccountController
      */
     public function showUpdateAccount(string $infoMessage = null, string $errorMessage = null): void
     {
+        $userManager = new UserManager();
+        $user = $userManager->getById($_SESSION["user"]["id"]);
+
         $view = new View("Mon Compte");
-        $view->render("updateAccount", []);
+        $view->render("updateAccount", [
+            "user" => $user,
+        ]);
     }
 }
