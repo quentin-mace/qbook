@@ -3,6 +3,7 @@ use config\Autoloader;
 use lib\controllers\AccountController;
 use lib\controllers\ErrorController;
 use lib\controllers\HomeController;
+use lib\controllers\RoomManagementController;
 
 // We import the config and autoloader.
 
@@ -88,6 +89,10 @@ try {
         case "updatePassword":
             $accountController = new AccountController();
             $accountController->updatePassword();
+            break;
+        case "roomManagement":
+            $accountController = new RoomManagementController();
+            $accountController->showRoomManagement();
             break;
         default:
             $errorController = new ErrorController();
