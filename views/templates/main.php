@@ -43,7 +43,7 @@ use services\Utils;
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="index.php?action=account">Mon compte</a></li>
                         <?php if($_SESSION["user"]["roleId"] === 2) : ?>
-                            <li><a class="dropdown-item" href="#">Gestion des salles</a></li>
+                            <li><a class="dropdown-item" href="index.php?action=roomManagement">Gestion des salles</a></li>
                             <li><a class="dropdown-item" href="#">Gestion des utilisateurs</a></li>
                         <?php endif; ?>
                         <li><a class="dropdown-item" <?= Utils::askConfirmation("Êtes vous sûr de voulloir vous déconnecter ?") ?> href="index.php?action=logoff">Déconnexion</a></li>
