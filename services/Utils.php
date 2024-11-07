@@ -139,7 +139,7 @@ class Utils {
         ";
     }
 
-    public static function betterDump($var): void
+    public static function betterDump(...$var): void
     {
         echo '<pre>';
         var_dump($var);

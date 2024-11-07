@@ -85,6 +85,10 @@ try {
             $accountController = new AccountController();
             $accountController->updateAccountInfo();
             break;
+        case "updatePassword":
+            $accountController = new AccountController();
+            $accountController->updatePassword();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();

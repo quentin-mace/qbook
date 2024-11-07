@@ -49,12 +49,13 @@ class UserManager extends AbstractEntityManager
 
     public function updateUser(User $user): bool
     {
-        $sql = "UPDATE users SET name = :name, email = :email WHERE id = :id";
+        $sql = "UPDATE users SET name = :name, email = :email, password = :password WHERE id = :id";
         $response = $this
             ->db
             ->query($sql, [
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
+                'password' => $user->getPassword(),
                 'id' => $user->getId()
             ]);
         return $response->rowCount() > 0;

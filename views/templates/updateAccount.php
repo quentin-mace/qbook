@@ -30,7 +30,7 @@
         </div>
         <div class="my-3 w-50">
             <label for="newPassword" hidden="hidden">New Password</label>
-            <input type="password" class="form-control" id="newPassword" aria-describedby="newPasswordHelp" placeholder="Nouveau mot de passe" name="newPasswordHelp" required>
+            <input type="password" class="form-control" id="newPassword" aria-describedby="newPasswordHelp" placeholder="Nouveau mot de passe" name="newPassword" required>
         </div>
         <div class="my-3 w-50">
             <label for="confirmPassword" hidden="hidden">Confirm New Password</label>

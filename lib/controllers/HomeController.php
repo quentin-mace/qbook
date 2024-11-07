@@ -3,6 +3,7 @@
 namespace lib\controllers;
 
 use Exception;
+use JetBrains\PhpStorm\NoReturn;
 use lib\models\Booking;
 use lib\models\BookingManager;
 use lib\models\RoomManager;
@@ -136,6 +137,7 @@ class HomeController
      * @return void
      * @throws Exception
      */
+    #[NoReturn]
     public function showSignin(string $errorMessage = null): void
     {
         $view = new View("Créer un compte");
@@ -157,6 +159,7 @@ class HomeController
      * or connect the user and redirect to homepage.
      * @throws Exception
      */
+    #[NoReturn]
     public function confirmSignin(): void
     {
         $name = htmlspecialchars(Utils::request("name"));
@@ -298,7 +301,7 @@ class HomeController
      * Deletes a booking
      * @throws Exception
      */
-    public function deleteBooking()
+    public function deleteBooking(): void
     {
         $bookingId = Utils::request("id");
         $bookingManager = new BookingManager();
