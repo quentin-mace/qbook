@@ -94,6 +94,10 @@ try {
             $accountController = new RoomManagementController();
             $accountController->showRoomManagement();
             break;
+        case "createRoom":
+            $accountController = new RoomManagementController();
+            $accountController->createRoom();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();

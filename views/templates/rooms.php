@@ -62,8 +62,8 @@
                         <input type="text" class="form-control" id="place" aria-describedby="textHelp" placeholder="Lieu" name="place" required>
                     </div>
                     <div class="my-3 form-outline" data-mdb-input-init>
-                        <label class="form-label" for="participantCount">Capacité</label>
-                        <input type="number" id="participantCount" name="participantCount" class="form-control" required/>
+                        <label class="form-label" for="capacity">Capacité</label>
+                        <input type="number" id="capacity" name="capacity" class="form-control" required/>
                     </div>
                 </form>
             </div>

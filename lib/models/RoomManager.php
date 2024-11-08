@@ -34,4 +34,17 @@ class RoomManager extends AbstractEntityManager
         }
         return $rooms;
     }
+
+
+    public function createRoom(Room $room): bool
+    {
+        $sql = "INSERT INTO rooms (name, place, capacity)
+                VALUES (:name, :place, :capacity);";
+        $response = $this->db->query($sql,[
+            "name" => $room->getName(),
+            "place" => $room->getPlace(),
+            "capacity" => $room->getCapacity()
+        ]);
+        return $response->rowCount() > 0;
+    }
 }
