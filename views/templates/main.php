@@ -35,6 +35,10 @@ use services\Utils;
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                         + Réserver une salle
                     </button>
+                <?php elseif ($_REQUEST["action"] === "roomManagement") : ?>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                        + Ajouter une salle
+                    </button>
                 <?php endif; ?>
                 <div class="dropdown">
                     <button class="btn btn-primary rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
