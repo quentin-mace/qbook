@@ -28,7 +28,7 @@
             <?php foreach ($rooms as $room): ?>
                 <tr class="row-link" data-bs-toggle="modal" data-bs-target="#showModal<?= $room->getId();?>">
                     <th scope="row"><?= ucfirst($room->getName()); ?></th>
-                    <td><?= ucfirst($room->getPlace()); ?></td>
+                    <td><?= ucfirst($room->getPlace() ?? "Aucun"); ?></td>
                     <td><?= $room->getCapacity(); ?></td>
                 </tr>
             <?php endforeach; ?>

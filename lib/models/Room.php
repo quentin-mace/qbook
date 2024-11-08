@@ -9,7 +9,7 @@ use services\Utils;
 class Room extends AbstractEntity
 {
     private string $name;
-    private string $place;
+    private ?string $place = null;
     private int $capacity;
 
     public function getName(): string

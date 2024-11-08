@@ -47,4 +47,11 @@ class RoomManager extends AbstractEntityManager
         ]);
         return $response->rowCount() > 0;
     }
+
+    public function deleteRoom(int $id): bool
+    {
+        $sql = "DELETE FROM `rooms` WHERE `id` = :id";
+        $response = $this->db->query($sql,["id" => $id]);
+        return $response->rowCount() > 0;
+    }
 }

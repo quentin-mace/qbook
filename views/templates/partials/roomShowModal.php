@@ -9,7 +9,7 @@ foreach ($rooms as $room): ?>
                 <div class="modal-header">
                     <div class="modal-title d-flex flex-column">
                         <h2 class="fs-2" id="showModalLabel"><?= ucfirst($room->getName()); ?></h2>
-                        <h3 class="fs-4 text-primary"><?= ucfirst($room->getPlace()); ?></h3>
+                        <h3 class="fs-4 text-primary"><?= ucfirst($room->getPlace() ?? ""); ?></h3>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

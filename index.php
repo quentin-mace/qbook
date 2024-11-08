@@ -92,11 +92,15 @@ try {
             break;
         case "roomManagement":
             $accountController = new RoomManagementController();
-            $accountController->showRoomManagement();
+            $accountController->showRoomManagement($message, $error);
             break;
         case "createRoom":
             $accountController = new RoomManagementController();
             $accountController->createRoom();
+            break;
+        case "deleteRoom":
+            $accountController = new RoomManagementController();
+            $accountController->deleteRoom();
             break;
         default:
             $errorController = new ErrorController();
