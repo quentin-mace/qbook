@@ -81,7 +81,7 @@ class HomeController
             ]);
         }
 
-        $this->stockUserSession($user);
+        Utils::stockUserSession($user);
 
         Utils::redirect('home',[
             "message" => "Bienvenue, {$user->getName()}"
@@ -213,21 +213,10 @@ class HomeController
         }
 
         $user = $userManager->getByEmail($email);
-        $this->stockUserSession($user);
+        Utils::stockUserSession($user);
 
         Utils::redirect("home", ["message" => "Votre compte à bien été créé ! Bienvenue $name !"]);
         exit();
-    }
-
-    public function stockUserSession(User $user): void
-    {
-        $_SESSION["user"] = [
-            "id" => $user->getId(),
-            "roleId" => $user->getRoleId(),
-            "firstLetter" => ucfirst(substr($user->getName(), 0, 1)),
-            "name" => $user->getName(),
-            "email" => $user->getEmail()
-        ];
     }
 
     /**
