@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : ven. 06 sep. 2024 à 09:20
+-- Généré le : ven. 08 nov. 2024 à 10:19
 -- Version du serveur : 8.0.39
 -- Version de PHP : 8.2.8
 
@@ -94,6 +94,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 CREATE TABLE `rooms` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
+  `place` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `capacity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -101,9 +102,9 @@ CREATE TABLE `rooms` (
 -- Déchargement des données de la table `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `name`, `capacity`) VALUES
-(1, 'bocal', 25),
-(2, 'voiture', 5);
+INSERT INTO `rooms` (`id`, `name`, `place`, `capacity`) VALUES
+(1, 'bocal', 'besançon', 25),
+(2, 'voiture', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`) VALUES
-(1, 2, 'Quentin', 'quentin.mace@quarksgroup.com', '$2y$10$YK.3dWutStwaFSUsyJ.WW.FrdaQdb/SNx86cHIPR5AnPBuwvn6FjK'),
+(1, 2, 'Quentin', 'quentin.mace@quarksgroup.com', '$2y$10$95Luu.OhwB4EqBWzJ9gVf.6cqs1rU97cmr/q5HEO8XXsYjlt1sguS'),
 (2, 1, 'Marvin', 'marvin.tarby@quarksgroup.com', '$2y$10$lGREPqX.tdUcfODPtyUMcuxFkns/uRgAWRnbbWrMOp6LfWwIytCdu');
 
 --

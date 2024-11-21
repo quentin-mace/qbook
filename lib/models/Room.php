@@ -2,11 +2,14 @@
 
 namespace lib\models;
 
+use Exception;
 use lib\models\AbstractEntity;
+use services\Utils;
 
 class Room extends AbstractEntity
 {
     private string $name;
+    private ?string $place = null;
     private int $capacity;
 
     public function getName(): string
@@ -19,6 +22,16 @@ class Room extends AbstractEntity
         $this->name = $name;
     }
 
+    public function getPlace(): ?string
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?string $place): void
+    {
+        $this->place = $place;
+    }
+
     public function getCapacity(): int
     {
         return $this->capacity;
@@ -29,5 +42,14 @@ class Room extends AbstractEntity
         $this->capacity = $capacity;
     }
 
+    /**
+     * @throws Exception
+     */
+    public function buildFromRequest(): void
+    {
+        $this->setName(htmlspecialchars(Utils::request("name")));
+        $this->setPlace(htmlspecialchars(Utils::request("place")));
+        $this->setCapacity(Utils::request("capacity"));
+    }
 
 }

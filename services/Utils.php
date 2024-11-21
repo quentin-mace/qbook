@@ -4,6 +4,7 @@ namespace services;
 
 use DateTime;
 use IntlDateFormatter;
+use lib\models\User;
 
 /**
  * Utility class : this class only contains static methods.
@@ -139,10 +140,29 @@ class Utils {
         ";
     }
 
+    /**
+     * Method to generate an easyer to read dump.
+     * @param $var mixed Any number of variables to dump
+     */
     public static function betterDump(...$var): void
     {
         echo '<pre>';
         var_dump($var);
         echo '</pre>';
+    }
+
+    /**
+     * Method to stock user info within the session variables
+     * @param $user User The user to stock
+     */
+    public static function stockUserSession(User $user): void
+    {
+        $_SESSION["user"] = [
+            "id" => $user->getId(),
+            "roleId" => $user->getRoleId(),
+            "firstLetter" => ucfirst(substr($user->getName(), 0, 1)),
+            "name" => $user->getName(),
+            "email" => $user->getEmail()
+        ];
     }
 }

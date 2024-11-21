@@ -79,8 +79,7 @@ class AccountController
             throw new Exception("Une erreur à eu lieu lors de la sauvegarde. Veuillez contacter un administrateur.");
         }
 
-        $homeController = new HomeController();
-        $homeController->stockUserSession($user);
+        Utils::stockUserSession($user);
 
         Utils::redirect("updateAccount", ["message" => "Votre compte à bien été modifié."]);
     }
@@ -117,8 +116,7 @@ class AccountController
             throw new Exception("Modification du mot de passe impossible. Contactez l'administrateur.");
         }
 
-        $homeController = new HomeController();
-        $homeController->stockUserSession($user);
+        Utils::stockUserSession($user);
 
         Utils::redirect("updateAccount", ["message" => "Votre mot de passe à bien été modifié."]);
     }
