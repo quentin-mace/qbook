@@ -29,7 +29,13 @@
                 <tr class="">
                     <th scope="row"><?= ucfirst($user->getName()); ?></th>
                     <td><?= $user->getRoleId() === 1 ? "Utilisateur" : "Administrateur"; ?></td>
-                    <td><?= $user->getRoleId() === 1 ? '<a href="#" title="Promouvoir"><i class="fa-solid fa-bolt" style="color: #6f42c1;"></i></a>' : '<a href="#" title="Déchoir"><i class="fa-solid fa-user-minus" style="color: #6f42c1;"></i></a>'; ?></td>
+                    <td>
+                        <?php if($user->getRoleId() === 1) : ?>
+                            <a href="index.php?action=upgradeUser&id=<?= $user->getId() ?>" title="Promouvoir"><i class="fa-solid fa-bolt" style="color: #6f42c1;"></i></a>
+                        <?php else: ?>
+                            <a href="index.php?action=downgradeUser&id=<?= $user->getId() ?>" title="Déchoir"><i class="fa-solid fa-user-minus" style="color: #6f42c1;"></i></a>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

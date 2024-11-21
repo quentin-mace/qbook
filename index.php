@@ -111,6 +111,14 @@ try {
             $usersController = new UserManagementController();
             $usersController->showUserManagement($message, $error);
             break;
+        case "upgradeUser":
+            $usersController = new UserManagementController();
+            $usersController->upgradeUser();
+            break;
+        case "downgradeUser":
+            $usersController = new UserManagementController();
+            $usersController->downgradeUser();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();
