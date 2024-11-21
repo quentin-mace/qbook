@@ -5,6 +5,7 @@ namespace lib\models;
 use Exception;
 use lib\controllers\HomeController;
 use lib\models\AbstractEntityManager;
+use PDO;
 
 class UserManager extends AbstractEntityManager
 {
@@ -19,6 +20,19 @@ class UserManager extends AbstractEntityManager
            throw new Exception("User {$id} not found");
         }
         return $user;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAll() : array
+    {
+        $sql = "SELECT * FROM users";
+        $rooms = $this->db->query($sql)->fetchAll(PDO::FETCH_CLASS, 'lib\models\User');
+        if(!$rooms){
+            throw new Exception("No user found");
+        }
+        return $rooms;
     }
 
     /**
