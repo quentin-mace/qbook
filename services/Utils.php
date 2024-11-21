@@ -151,6 +151,10 @@ class Utils {
         echo '</pre>';
     }
 
+    /**
+     * Method to stock user info within the session variables
+     * @param $user User The user to stock
+     */
     public static function stockUserSession(User $user): void
     {
         $_SESSION["user"] = [
