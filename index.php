@@ -102,6 +102,10 @@ try {
             $accountController = new RoomManagementController();
             $accountController->deleteRoom();
             break;
+        case "updateRoom":
+            $accountController = new RoomManagementController();
+            $accountController->updateRoom();
+            break;
         default:
             $errorController = new ErrorController();
             $errorController->show404();

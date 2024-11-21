@@ -38,6 +38,8 @@ class RoomManagementController
         $room = new Room();
         $room->buildFromRequest();
 
+        $this->sameNameRoomExists($room);
+
         $roomManager = new RoomManager();
 
         $response = $roomManager->createRoom($room);
@@ -65,5 +67,40 @@ class RoomManagementController
         Utils::redirect("roomManagement", [
             "message" => "La salle à bien été supprimée"
         ]);
+    }
+
+    /**
+     * Updates a room
+     * @throws Exception
+     */
+    public function updateRoom(): void
+    {
+        $room = new Room();
+        $room->setId(Utils::request("id"));
+        $room->buildFromRequest();
+
+        $this->sameNameRoomExists($room);
+
+        $roomManager = new RoomManager();
+        $response = $roomManager->updateRoom($room);
+
+        if (!$response) {
+            throw new Exception("Une erreur à eu lieu lors de la mise à jour. Veuillez contacter un administrateur.");
+        }
+
+        Utils::redirect("roomManagement", ["message"=>"La salle à été mise à jour avec succès !"]);
+
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function sameNameRoomExists(Room $room): void
+    {
+        $roomManager = new RoomManager();
+        $sameNameRoom = $roomManager->getByName($room->getName());
+        if($sameNameRoom) {
+            Utils::redirect("roomManagement", ["error"=>"Impossible de modifier la salle. Une autre salle existe déja à ce nom"]);
+        }
     }
 }

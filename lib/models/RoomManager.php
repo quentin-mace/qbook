@@ -6,6 +6,7 @@ namespace lib\models;
 use Exception;
 use lib\models\AbstractEntityManager;
 use PDO;
+use services\Utils;
 
 class RoomManager extends AbstractEntityManager
 {
@@ -19,6 +20,16 @@ class RoomManager extends AbstractEntityManager
         if(!$room){
             throw new Exception("Room {$id} not found");
         }
+        return $room;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getByName(string $name) : Room|false|null
+    {
+        $sql = "SELECT * FROM rooms WHERE name = :name";
+        $room = $this->db->query($sql, ["name" => $name])->fetchObject('lib\models\Room');
         return $room;
     }
 
@@ -44,6 +55,22 @@ class RoomManager extends AbstractEntityManager
             "name" => $room->getName(),
             "place" => $room->getPlace(),
             "capacity" => $room->getCapacity()
+        ]);
+        return $response->rowCount() > 0;
+    }
+
+    public function updateRoom(Room $room): bool
+    {
+        $sql = "UPDATE `rooms`
+                SET `name` = :name,
+                    `place` = :place,
+                    `capacity` = :capacity
+                WHERE `id` = :id";
+        $response = $this->db->query($sql,[
+            "name" => $room->getName(),
+            "place" => $room->getPlace(),
+            "capacity" => $room->getCapacity(),
+            "id" => $room->getId()
         ]);
         return $response->rowCount() > 0;
     }

@@ -19,7 +19,7 @@ foreach ($rooms as $room): ?>
                         </div>
                         <div class="my-3 w-50">
                             <label for="place" hidden="hidden">Lieu</label>
-                            <input type="text" class="form-control" id="lieu" aria-describedby="textHelp" placeholder="Lieu" name="lieu" value="<?= $room->getPlace(); ?>" required>
+                            <input type="text" class="form-control" id="place" aria-describedby="textHelp" placeholder="Lieu" name="place" value="<?= $room->getPlace(); ?>" required>
                         </div>
                         <div class="my-3 form-outline" data-mdb-input-init>
                             <label class="form-label" for="capacity">Capacité</label>
