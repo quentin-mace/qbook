@@ -17,7 +17,7 @@ use services\Utils;
     <link href="css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="">
     <nav class="navbar navbar-expand shadow-sm d-flex justify-content-center">
@@ -48,7 +48,7 @@ use services\Utils;
                         <li><a class="dropdown-item" href="index.php?action=account">Mon compte</a></li>
                         <?php if($_SESSION["user"]["roleId"] === 2) : ?>
                             <li><a class="dropdown-item" href="index.php?action=roomManagement">Gestion des salles</a></li>
-                            <li><a class="dropdown-item" href="#">Gestion des utilisateurs</a></li>
+                            <li><a class="dropdown-item" href="index.php?action=userManagement">Gestion des utilisateurs</a></li>
                         <?php endif; ?>
                         <li><a class="dropdown-item" <?= Utils::askConfirmation("Êtes vous sûr de voulloir vous déconnecter ?") ?> href="index.php?action=logoff">Déconnexion</a></li>
                     </ul>

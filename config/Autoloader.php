@@ -9,10 +9,8 @@ class Autoloader
 {
     /**
      * Method used to do the actual autoloading
-     *
-     * @return void
      */
-    static function register()
+    static function register(): void
     {
         spl_autoload_register(array(__CLASS__, 'autoload'));
     }
@@ -21,9 +19,8 @@ class Autoloader
      * Method used to define the path followed to autoload classes
      *
      * @param $className
-     * @return void
      */
-    static function autoload($className)
+    static function autoload($className): void
     {
         $className = str_replace("\\", "/", $className);
         require $className . '.php';
