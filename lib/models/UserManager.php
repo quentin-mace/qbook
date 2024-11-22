@@ -9,6 +9,9 @@ use PDO;
 
 class UserManager extends AbstractEntityManager
 {
+    const ROLE_ADMIN = 2;
+    const ROLE_BASIC_USER = 1;
+
     /**
      * @throws Exception
      */
@@ -63,10 +66,11 @@ class UserManager extends AbstractEntityManager
 
     public function updateUser(User $user): bool
     {
-        $sql = "UPDATE users SET name = :name, email = :email, password = :password WHERE id = :id";
+        $sql = "UPDATE users SET role_id = :role_id, name = :name, email = :email, password = :password WHERE id = :id";
         $response = $this
             ->db
             ->query($sql, [
+                'role_id' => $user->getRoleId(),
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'password' => $user->getPassword(),
