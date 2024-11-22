@@ -33,6 +33,7 @@ use services\Utils;
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>
         </div>
     </section>
 </section>

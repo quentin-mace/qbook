@@ -99,7 +99,7 @@ class RoomManagementController
     {
         $roomManager = new RoomManager();
         $sameNameRoom = $roomManager->getByName($room->getName());
-        if($sameNameRoom) {
+        if($sameNameRoom && $sameNameRoom->getId() !== $room->getId()) {
             Utils::redirect("roomManagement", ["error"=>"Impossible de modifier la salle. Une autre salle existe déja à ce nom"]);
         }
     }

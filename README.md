@@ -10,3 +10,9 @@ Then, into the new config files, change this :
 * In `docker-compose.yml` add your own root username and password at lines `18`, `32` and `33`
 * In `config/config.php` also add your own user and password as second parameter to the `define()` function.
 It must match those defined in your `docker-compose.yml`.
+
+Make also sure you have docker installed on your computer.
+
+Then, you can launch the command `docker compose up -d` to run the server. 
+
+Once everything above is done, you can connect to the website with the URL : http://localhost:7979

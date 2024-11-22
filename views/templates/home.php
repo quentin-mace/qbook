@@ -1,4 +1,4 @@
-<section  class="d-flex align-items-center justify-content-start vh-100 flex-column" xmlns="http://www.w3.org/1999/html">
+<section  class="d-flex align-items-center justify-content-start vh-100 flex-column">
     <?php use lib\models\User;
     use services\Utils;
 
@@ -43,7 +43,7 @@
 
 
 <!-- Create Modal -->
-<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,7 +56,7 @@
                 <form id="createBooking" class="my-3 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=createBooking" method="post">
                     <div class="my-3 w-50">
                         <label for="title" hidden="hidden">Nom de la réservation</label>
-                        <input type="text" class="form-control" id="title" aria-describedby="textHelp" placeholder="Nom de la réservation" name="title" required>
+                        <input type="text" class="form-control" id="title" placeholder="Nom de la réservation" name="title" required>
                     </div>
                     <div class="my-3 w-50">
                         <label for="roomSelected" hidden="hidden">Salle</label>

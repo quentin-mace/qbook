@@ -1,4 +1,4 @@
-<section  class="d-flex align-items-center justify-content-start vh-100 flex-column" xmlns="http://www.w3.org/1999/html">
+<section  class="d-flex align-items-center justify-content-start vh-100 flex-column">
     <?php use lib\models\User;
     use services\Utils;
 
@@ -31,9 +31,9 @@
                     <td><?= $user->getRoleId() === 1 ? "Utilisateur" : "Administrateur"; ?></td>
                     <td>
                         <?php if($user->getRoleId() === 1) : ?>
-                            <a href="index.php?action=upgradeUser&id=<?= $user->getId() ?>" title="Promouvoir"><i class="fa-solid fa-bolt" style="color: #6f42c1;"></i></a>
+                            <a href="index.php?action=upgradeUser&id=<?= $user->getId() ?>" title="Promouvoir" <?= Utils::askConfirmation("Êtes vous sûr de vouloir promouvoir cet utilisateur ?") ?>><i class="fa-solid fa-bolt" style="color: #6f42c1;"></i></a>
                         <?php else: ?>
-                            <a href="index.php?action=downgradeUser&id=<?= $user->getId() ?>" title="Déchoir"><i class="fa-solid fa-user-minus" style="color: #6f42c1;"></i></a>
+                            <a href="index.php?action=downgradeUser&id=<?= $user->getId() ?>" title="Déchoir" <?= Utils::askConfirmation("Êtes vous sûr de vouloir déchoir cet utilisateur ?") ?>><i class="fa-solid fa-user-minus" style="color: #6f42c1;"></i></a>
                         <?php endif; ?>
                     </td>
                 </tr>
