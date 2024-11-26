@@ -5,9 +5,13 @@ namespace lib\models;
 use Exception;
 use lib\controllers\HomeController;
 use lib\models\AbstractEntityManager;
+use PDO;
 
 class UserManager extends AbstractEntityManager
 {
+    const ROLE_ADMIN = 2;
+    const ROLE_BASIC_USER = 1;
+
     /**
      * @throws Exception
      */
@@ -19,6 +23,19 @@ class UserManager extends AbstractEntityManager
            throw new Exception("User {$id} not found");
         }
         return $user;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAll() : array
+    {
+        $sql = "SELECT * FROM users";
+        $rooms = $this->db->query($sql)->fetchAll(PDO::FETCH_CLASS, 'lib\models\User');
+        if(!$rooms){
+            throw new Exception("No user found");
+        }
+        return $rooms;
     }
 
     /**
@@ -49,10 +66,11 @@ class UserManager extends AbstractEntityManager
 
     public function updateUser(User $user): bool
     {
-        $sql = "UPDATE users SET name = :name, email = :email, password = :password WHERE id = :id";
+        $sql = "UPDATE users SET role_id = :role_id, name = :name, email = :email, password = :password WHERE id = :id";
         $response = $this
             ->db
             ->query($sql, [
+                'role_id' => $user->getRoleId(),
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'password' => $user->getPassword(),

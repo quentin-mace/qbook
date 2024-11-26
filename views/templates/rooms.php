@@ -1,4 +1,4 @@
-<section  class="d-flex align-items-center justify-content-start vh-100 flex-column" xmlns="http://www.w3.org/1999/html">
+<section  class="d-flex align-items-center justify-content-start vh-100 flex-column">
     <?php use lib\models\User;
     use services\Utils;
 
@@ -42,7 +42,7 @@
 
 
 <!-- Create Modal -->
-<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,11 +55,11 @@
                 <form id="createRoom" class="my-3 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=createRoom" method="post">
                     <div class="my-3 w-50">
                         <label for="name" hidden="hidden">Nom de la Salle</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="textHelp" placeholder="Nom de la salle" name="name" required>
+                        <input type="text" class="form-control" id="name" placeholder="Nom de la salle" name="name" required>
                     </div>
                     <div class="my-3 w-50">
                         <label for="place" hidden="hidden">Lieu</label>
-                        <input type="text" class="form-control" id="place" aria-describedby="textHelp" placeholder="Lieu" name="place" required>
+                        <input type="text" class="form-control" id="place" placeholder="Lieu" name="place" required>
                     </div>
                     <div class="my-3 form-outline" data-mdb-input-init>
                         <label class="form-label" for="capacity">Capacité</label>
@@ -69,7 +69,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <input type="submit" form="createRoom" class="btn btn-primary">
+                <input type="submit" value="Ajouter" form="createRoom" class="btn btn-primary">
             </div>
         </div>
     </div>
