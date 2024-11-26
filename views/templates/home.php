@@ -85,7 +85,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <input type="submit" form="createBooking" class="btn btn-primary">
+                <input type="submit" value="Réserver" form="createBooking" class="btn btn-primary">
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@ foreach ($bookings as $booking): ?>
                     <form id="editBooking<?= $booking->getId(); ?>" class="my-3 d-flex flex-column align-items-center justify-content-center w-100" action="index.php?action=updateBooking&id=<?= $booking->getId(); ?>" method="post">
                         <div class="my-3 w-50">
                             <label for="title<?= $booking->getId(); ?>" hidden="hidden">Nom de la réservation</label>
-                            <input type="text" class="form-control" id="title<?= $booking->getId(); ?>" placeholder="Nom de la réservation" name="title" value="<?= $booking->getTitle(); ?>" required>
+                            <input type="text" class="form-control" id="title<?= $booking->getId(); ?>" placeholder="Nom de la réservation" name="title" value="<?= $booking->getTitle(); ?>" aria-labelledby="title<?= $booking->getId(); ?>" required>
                         </div>
                         <div class="my-3 w-50">
                             <label for="roomSelected<?= $booking->getId(); ?>" hidden="hidden">Salle</label>
@@ -44,7 +44,7 @@ foreach ($bookings as $booking): ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#showModal<?= $booking->getId(); ?>">Annuler</button>
-                    <input type="submit" form="editBooking<?= $booking->getId(); ?>" class="btn btn-primary">
+                    <input type="submit" value="Modifier" form="editBooking<?= $booking->getId(); ?>" class="btn btn-primary">
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ foreach ($rooms as $room): ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#showModal<?= $room->getId(); ?>">Annuler</button>
-                    <input type="submit" form="editRoom<?= $room->getId(); ?>" class="btn btn-primary">
+                    <input type="submit" value="Modifier" form="editRoom<?= $room->getId(); ?>" class="btn btn-primary">
                 </div>
             </div>
         </div>

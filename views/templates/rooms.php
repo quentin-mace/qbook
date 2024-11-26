@@ -69,7 +69,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <input type="submit" form="createRoom" class="btn btn-primary">
+                <input type="submit" value="Ajouter" form="createRoom" class="btn btn-primary">
             </div>
         </div>
     </div>
