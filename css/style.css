@@ -1,3 +1,16 @@
 :root {
     --bs-body-font-family: "Lexend", sans-serif;
+    --bs-primary: #6d31ed;
+    --bs-btn-bg: var(--bs-primary);
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.row-link:hover {
+    cursor: pointer;
 }

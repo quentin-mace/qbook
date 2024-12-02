@@ -4,4 +4,4 @@
 #Config files
 config/config.php
 docker-compose.yml
-/vendor/
+vendor

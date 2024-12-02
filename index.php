@@ -1,7 +1,10 @@
 <?php
 use config\Autoloader;
+use lib\controllers\AccountController;
 use lib\controllers\ErrorController;
 use lib\controllers\HomeController;
+use lib\controllers\RoomManagementController;
+use lib\controllers\UserManagementController;
 
 // We import the config and autoloader.
 
@@ -13,21 +16,108 @@ Autoloader::register();
 // We get which action is asked
 
 $action = "home";
+$message = null;
+$parameters = null;
+$error = null;
 
-$parameters = $_GET;
+if(isset($_SESSION['post_data'])){
+    $parameters = $_SESSION['post_data'];
+    unset($_SESSION['post_data']);
+}
 
-if(isset($parameters["action"])){
-    $action = $parameters["action"];
+if(isset($_GET["action"])){
+    $action = $_GET["action"];
+}
+if(isset($parameters["message"])){
+    $message = $parameters["message"];
+}
+if(isset($parameters["error"])){
+    $error = $parameters["error"];
 }
 
 
 // We call the proper controller depending on which action is passed
-
 try {
     switch ($action) {
         case "home":
             $homeController = new HomeController();
-            $homeController->showHome();
+            $homeController->showHome($message, $error);
+            break;
+        case "login":
+            $homeController = new HomeController();
+            $homeController->showLogin($error);
+            break;
+        case "confirmLogin":
+            $homeController = new HomeController();
+            $homeController->confirmLogin();
+            break;
+        case "logoff":
+            $homeController = new HomeController();
+            $homeController->logOff();
+            break;
+        case "signin":
+            $homeController = new HomeController();
+            $homeController->showSignin($error);
+            break;
+        case "confirmSignin":
+            $homeController = new HomeController();
+            $homeController->confirmSignin();
+            break;
+        case "updateBooking":
+            $homeController = new HomeController();
+            $homeController->updateBooking();
+            break;
+        case "createBooking":
+            $homeController = new HomeController();
+            $homeController->createBooking();
+            break;
+        case "deleteBooking":
+            $homeController = new HomeController();
+            $homeController->deleteBooking();
+            break;
+        case "account":
+            $accountController = new AccountController();
+            $accountController->showAccount($message, $error);
+            break;
+        case "updateAccount":
+            $accountController = new AccountController();
+            $accountController->showUpdateAccount($message, $error);
+            break;
+        case "updateAccountInfo":
+            $accountController = new AccountController();
+            $accountController->updateAccountInfo();
+            break;
+        case "updatePassword":
+            $accountController = new AccountController();
+            $accountController->updatePassword();
+            break;
+        case "roomManagement":
+            $roomsController = new RoomManagementController();
+            $roomsController->showRoomManagement($message, $error);
+            break;
+        case "createRoom":
+            $roomsController = new RoomManagementController();
+            $roomsController->createRoom();
+            break;
+        case "deleteRoom":
+            $roomsController = new RoomManagementController();
+            $roomsController->deleteRoom();
+            break;
+        case "updateRoom":
+            $roomsController = new RoomManagementController();
+            $roomsController->updateRoom();
+            break;
+        case "userManagement":
+            $usersController = new UserManagementController();
+            $usersController->showUserManagement($message, $error);
+            break;
+        case "upgradeUser":
+            $usersController = new UserManagementController();
+            $usersController->upgradeUser();
+            break;
+        case "downgradeUser":
+            $usersController = new UserManagementController();
+            $usersController->downgradeUser();
             break;
         default:
             $errorController = new ErrorController();
