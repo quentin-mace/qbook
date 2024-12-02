@@ -63,6 +63,13 @@ class BookingManager extends AbstractEntityManager
         return $response->rowCount() > 0;
     }
 
+    public function deleteBookingsByRoomId(int $roomId): bool
+    {
+        $sql = "DELETE FROM `bookings` WHERE `room_id` = :room_id";
+        $response = $this->db->query($sql,["room_id" => $roomId]);
+        return $response->rowCount() > 0;
+    }
+
     public function selectBetweenDatesForRoom(Booking $booking): Booking|false|null
     {
         $sql = "SELECT * FROM bookings 

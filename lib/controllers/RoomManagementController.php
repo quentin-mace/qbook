@@ -14,6 +14,7 @@ use views\View;
 class RoomManagementController
 {
     /**
+     * Displays the Room management page
      * @throws Exception
      */
     public function showRoomManagement(string $infoMessage = null, string $errorMessage = null): void
@@ -51,7 +52,7 @@ class RoomManagementController
     }
 
     /**
-     * Deletes a room
+     * Deletes a room, and all bookings associated
      * @throws Exception
      */
     public function deleteRoom(): void
@@ -59,6 +60,13 @@ class RoomManagementController
         $roomId = Utils::request("id");
         $roomManager = new RoomManager();
         $result = $roomManager->deleteRoom($roomId );
+
+        if (!$result) {
+            throw new Exception("Une erreur à eu lieu lors de la suppression de la salle. Veuillez contacter un administrateur.");
+        }
+
+        $bookingManager = new BookingManager();
+        $result = $bookingManager->deleteBookingsByRoomId($roomId);
 
         if (!$result) {
             throw new Exception("Une erreur à eu lieu lors de la suppression de la salle. Veuillez contacter un administrateur.");
@@ -93,6 +101,8 @@ class RoomManagementController
     }
 
     /**
+     * Checks if a room with the same name exists in the databases, and redirect on the room management page with an error message if it is the case
+     * @param Room $room Room to check
      * @throws Exception
      */
     private function sameNameRoomExists(Room $room): void

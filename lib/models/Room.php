@@ -43,6 +43,7 @@ class Room extends AbstractEntity
     }
 
     /**
+     * Permits to get the info from the request to build the object
      * @throws Exception
      */
     public function buildFromRequest(): void
