@@ -12,6 +12,7 @@ use views\View;
 class AccountController
 {
     /**
+     * Displays the user account page
      * @throws Exception
      */
     public function showAccount(string $infoMessage = null, string $errorMessage = null): void
@@ -37,6 +38,7 @@ class AccountController
 
 
     /**
+     * Displays the page to update the account
      * @throws Exception
      */
     public function showUpdateAccount(string $infoMessage = null, string $errorMessage = null): void
@@ -53,6 +55,7 @@ class AccountController
     }
 
     /**
+     * Handles the info when the form to update the account is posted
      * @throws Exception
      */
     public function updateAccountInfo(): void
@@ -85,6 +88,7 @@ class AccountController
     }
 
     /**
+     * Handles the info when the form to update the password is posted
      * @throws Exception
      */
     public function updatePassword(): void

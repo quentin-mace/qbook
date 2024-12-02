@@ -15,6 +15,7 @@ use views\View;
 class UserManagementController
 {
     /**
+     * Displays the users management room
      * @throws Exception
      */
     public function showUserManagement(string $infoMessage = null, string $errorMessage = null): void
@@ -31,6 +32,7 @@ class UserManagementController
     }
 
     /**
+     * Method to update a user status into the DB
      * @throws Exception
      */
     private function updateUser(User $user): void
@@ -44,6 +46,7 @@ class UserManagementController
     }
 
     /**
+     * Method to execute when clicking the upgrade user button
      * @throws Exception
      */
     public function upgradeUser(): void
@@ -57,6 +60,7 @@ class UserManagementController
     }
 
     /**
+    * Method to execute when clicking the downgrade user button
     * @throws Exception
     */
     public function downgradeUser(): void
