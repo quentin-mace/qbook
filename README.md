@@ -15,4 +15,8 @@ Make also sure you have docker installed on your computer.
 
 Then, you can launch the command `docker compose up -d` to run the server. 
 
+Now you can connect to the database here : http://localhost:7978
+
+Once on _PHPmyadmin_ you can click on the database **"qbook"** then click **"import"**, ant then select the file `qbook.sql`
+
 Once everything above is done, you can connect to the website with the URL : http://localhost:7979
