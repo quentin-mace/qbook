@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : ven. 08 nov. 2024 à 10:19
--- Version du serveur : 8.0.39
+-- Généré le : lun. 02 déc. 2024 à 09:11
+-- Version du serveur : 8.0.40
 -- Version de PHP : 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -44,27 +44,6 @@ CREATE TABLE `bookings` (
 INSERT INTO `bookings` (`id`, `user_id`, `room_id`, `title`, `start_at`, `end_at`, `participants_count`) VALUES
 (1, 1, 1, 'Présentation QBook', '2024-10-14 14:00:00', '2024-10-14 15:00:00', 15),
 (2, 2, 2, 'Hellfest', '2025-06-19 00:00:00', '2025-06-23 00:00:00', 5);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `equipements`
---
-
-CREATE TABLE `equipements` (
-  `id` int NOT NULL,
-  `name` text NOT NULL,
-  `quantity` int NOT NULL,
-  `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `equipements`
---
-
-INSERT INTO `equipements` (`id`, `name`, `quantity`, `price`) VALUES
-(1, 'Paperboard', 3, 25.8),
-(2, 'Ecran géant', 1, 1524);
 
 -- --------------------------------------------------------
 
@@ -109,26 +88,6 @@ INSERT INTO `rooms` (`id`, `name`, `place`, `capacity`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `rooms_equipements`
---
-
-CREATE TABLE `rooms_equipements` (
-  `id` int NOT NULL,
-  `room_id` int NOT NULL,
-  `equipement_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `rooms_equipements`
---
-
-INSERT INTO `rooms_equipements` (`id`, `room_id`, `equipement_id`) VALUES
-(1, 1, 1),
-(2, 1, 2);
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `users`
 --
 
@@ -161,12 +120,6 @@ ALTER TABLE `bookings`
   ADD KEY `room_id` (`room_id`);
 
 --
--- Index pour la table `equipements`
---
-ALTER TABLE `equipements`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `roles`
 --
 ALTER TABLE `roles`
@@ -177,14 +130,6 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `rooms_equipements`
---
-ALTER TABLE `rooms_equipements`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `room_id` (`room_id`),
-  ADD KEY `equipement_id` (`equipement_id`);
 
 --
 -- Index pour la table `users`
@@ -204,12 +149,6 @@ ALTER TABLE `bookings`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `equipements`
---
-ALTER TABLE `equipements`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT pour la table `roles`
 --
 ALTER TABLE `roles`
@@ -219,12 +158,6 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT pour la table `rooms_equipements`
---
-ALTER TABLE `rooms_equipements`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --

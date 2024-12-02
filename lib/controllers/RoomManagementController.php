@@ -64,6 +64,13 @@ class RoomManagementController
             throw new Exception("Une erreur à eu lieu lors de la suppression de la salle. Veuillez contacter un administrateur.");
         }
 
+        $bookingManager = new BookingManager();
+        $result = $bookingManager->deleteBookingsByRoomId($roomId);
+
+        if (!$result) {
+            throw new Exception("Une erreur à eu lieu lors de la suppression de la salle. Veuillez contacter un administrateur.");
+        }
+
         Utils::redirect("roomManagement", [
             "message" => "La salle à bien été supprimée"
         ]);
