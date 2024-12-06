@@ -10,8 +10,8 @@
     define('TEMPLATE_VIEW_PATH', './views/templates/'); // The path to views templates.
     define('MAIN_VIEW_PATH', TEMPLATE_VIEW_PATH . 'main.php'); // The path to main template.
 
-    define('DB_HOST', 'mysql');
-    define('DB_NAME', 'qbook');
-    define('DB_USER', 'root'); //Replace with your own user and password (Match with docker-compose.yaml)
-    define('DB_PASS', '');
+    define('DB_HOST', 'yourdbhost');
+    define('DB_NAME', 'yourdbname');
+    define('DB_USER', 'yourdbuser'); //Replace with your own user and password (Match with docker-compose.yaml)
+    define('DB_PASS', 'yourdbpassword');
 
